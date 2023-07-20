@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <button><a href="/index.html">메인가기</a></button>
+    <main>
+        <article class="timer_article">
+            <h1 class="timer_article_title">타이머</h1>
+            <div class="input_time_wrap">
+                <input type="text" class="input_time" maxlength="2" value="00"><span>시</span>
+                <input type="text" class="input_time" maxlength="2" value="00"><span>분</span>
+                <input type="text" class="input_time" maxlength="2" value="00"><span>초</span>
+            </div>
+            <button type="button" class="time_input_button" onclick="getInputTime()">입력</button>
+
+            <div id="timer">00:00:00.00</div>
+
+            <button type="button" class="buttons" onclick="strat()">시작</button>
+            <button type="button" class="buttons" onclick="stop()">중지</button>
+            <button type="button" class="buttons" onclick="reset()">초기화</button>
+        </article>
+    </main>
+    <script>
+        var timer = document.getElementById("timer");
+        var hour = 0;
+        var minute = 0;
+        var second = 0;
+        var mSecond = 0;
+        var inputButton = document.getElementsByClassName("time_input_button")[0];
+        var inputTime = document.getElementsByClassName("input_time");
+
+        var stratTimer;
+        var operatingTimer = false;
+
+        // 입력한 시간을 받는 함수
+        function getInputTime() {
+            var inputTime = document.getElementsByClassName("input_time");
+
+            for (var i = 0; i < inputTime.length; i++) {
+                if (isNaN(Number(inputTime[i].value))) {
+                    inputTime[0].value = "00";
+                    inputTime[1].value = "00";
+                    inputTime[2].value = "00";
+                    return alert("숫자를 입력하세요!");
+                }
+            }
+
+            hour = inputTime[0].value;
+            minute = inputTime[1].value;
+            second = inputTime[2].value;
+
+
+            setInputTime();
+
+            inputTime[0].value = "00";
+            inputTime[1].value = "00";
+            inputTime[2].value = "00";
+        }
+
+        // 입력한 시간을 설정하는 함수
+        function setInputTime() {
+            timer = document.getElementById("timer");
+            return timer.innerHTML = `${formatTime(hour)}:${formatTime(minute)}:${formatTime(second)}.${formatTime(mSecond)}`;
+        }
+
+        function formatTime(time) {
+            if (time[0] == 0 && time.length == 2) {
+                return time;
+            }
+            return time < 10 ? `${0}${time}` : time;
+        }
+
+        // 타이머 시작
+        function strat() {
+            if (timer.textContent == "00:00:00.00") {
+                return alert("시간을 설정해주세요!");
+            }
+
+            if (operatingTimer == false) {
+                operatingTimer = true;
+                inputButton.disabled = true;
+                for (var key in inputTime) {
+                    inputTime[key].disabled = true;
+                }
+                stratTimer = setInterval(updateTimer, 10);
+            }
+        }
+
+        function updateTimer() {
+            var getTimer = document.getElementById("timer");
+            if (hour == 0 && minute == 0 && second == 0 && mSecond == 0) {
+                stop();
+                alert ("시간 종료!!");
+                return;
+            }
+            getTimer.innerHTML = getTime();
+        }
+
+        function getTime() {
+            mSecond -= 1;
+            if (mSecond == -1) {
+                mSecond = 99;
+                second -= 1;
+            }
+            if (second == -1) {
+                second = 59;
+                minute -= 1;
+            }
+            if (minute == -1) {
+                minute = 59;
+                hour -= 1;
+            }
+
+            return `${formatTime(hour)}:${formatTime(minute)}:${formatTime(second)}.${formatTime(mSecond)}`;
+        }
+
+        // 타이머 중지
+        function stop() {
+            if (operatingTimer) {
+                operatingTimer = false;
+                inputButton.disabled = false;
+                for (var key in inputTime) {
+                    inputTime[key].disabled = false;
+                }
+                clearInterval(stratTimer);
+            }
+        }
+
+        // 타이머 초기화
+        function reset() {
+            if (operatingTimer == false) {
+                hour = 0;
+                minute = 0;
+                second = 0;
+                mSecond = 0;
+                document.getElementById("timer").innerHTML = "00:00:00.00";
+            }
+        }
+
+    </script>
+</body>
+
+</html>

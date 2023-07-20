@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+#time {
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#todoInput {
+    padding: 8px;
+    width: 250px;
+}
+
+#addButton {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.input_date_time{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 5px;
+    padding: 0 17px;
+}
+
+#todoList {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+    padding: 8px;
+    background-color: #dbd3d3;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+li span {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+li button {
+    padding: 4px 8px;
+    margin: 0 5px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

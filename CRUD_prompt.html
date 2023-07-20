@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" Fcontent="width=device-width, initial-scale=1.0">
+    <title>CRUD_prompt</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <button type="button"><a href="/index.html">메인가기</a></button>
+    <br><br>
+    <button type="button" onclick="addStudent()">학생 추가</button>
+    <br>
+    <button type="button" onclick="printStudentsList()">학생 조회</button>
+    <br>
+    <button type="button" onclick="deleteStudent()">학생 삭제</button>
+    <br>
+    <button type="button" onclick="modifyStudent()">학생 수정</button>
+    <br>
+    <button type="button" onclick="console.clear()">콘솔 초기화</button>
+
+
+
+    <script>
+        console.log("시작");
+        // 학생들 배열
+        var students = [];
+
+        // 1. 학생 추가 함수
+        function addStudent() {
+
+            // 학생 객체
+            var student = {
+                이름: '',
+                나이: 0,
+                주소: '',
+            };
+
+            for (var key in student) {
+                student[key] = prompt(key + "을[를] 입력해주세요.")?.trim();
+                // ? -> 옵셔널 체이닝
+                // null, undefined 인지 빈 값 체크
+                // -> 빈값일 시 trim() 실행 x
+                // -> 빈값이 아닐 시 trim() 실행 o 
+
+                // 공백확인
+                if (blankCheck(student[key])) { return; }
+            }
+
+            students.splice(students.length, 0, student);
+            console.log(students);
+            alert(students[students.length - 1].이름 + " 학생이 등록되었습니다.");
+        }
+
+        // 2. 학생 목록 확인 함수
+        function printStudentsList() {
+            console.log(students.length);
+            if (students.length == 0) {
+                return alert("학생 목록이 비어있습니다.");
+            }
+
+            console.log("<등록된 학생 수: " + students.length + "명>");
+            for (var i = 0; i < students.length; i++) {
+                console.log("- " + (i + 1) + "번 학생");
+                for (var key in students[i]) {
+                    console.log(students[i][key]);
+                }
+            }
+
+            console.log("------------------------------");
+        }
+
+        // 3. 학생 삭제 함수
+        function deleteStudent() {
+            console.log(students.length);
+
+            if (students.length == 0) {
+                return alert("학생 목록이 비어있습니다.");
+            }
+
+            var studentNumber = prompt("삭제를 원하는 학생의 번호를 입력해주세요.")?.trim();
+
+            // 공백 확인
+            if (blankCheck(studentNumber)) { return; }
+
+            // 인덱스 범위 확인
+            if (indexCheck(studentNumber)) { return; }
+
+
+            if (students[studentNumber - 1] == "삭제 되었습니다.") {
+                return alert("이미 삭제된 학생입니다.");
+            }
+
+            // 정말 삭제할 것인지 확인
+            if (checkDeleteOrModify("삭제", studentNumber)) { return }
+        }
+
+        // 4. 학생 수정 함수
+        function modifyStudent() {
+            console.log(students.length);
+
+            if (students.length == 0) {
+                return alert("학생 목록이 비어있습니다.");
+            }
+
+            var studentNumber = prompt("수정을 원하는 학생의 번호를 입력해주세요.")?.trim();
+            // 공백 확인
+            if (blankCheck(studentNumber)) { return; }
+
+            // 인덱스 범위 확인
+            if (indexCheck(studentNumber)) { return; }
+
+            // 삭제된 학생인지 확인
+            if (students[studentNumber - 1] == "삭제 되었습니다.") {
+                return alert("이미 삭제된 학생입니다.");
+            }
+
+            // 정말 수정할 것인지 확인
+            if (checkDeleteOrModify("수정", studentNumber)) { return }
+        }
+
+
+
+        // 공백 확인 함수
+        function blankCheck(value) {
+            if (value == null || value == "" || value.length == 0) {
+                alert("공백입니다!");
+                return true;
+            }
+        }
+
+        // 숫자형 확인 함수
+        function isNumber(value) {
+            if (!Number(value)) {
+                alert("0 또는 문자 이외의 번호를 입력해주세요!");
+                return true;
+            }
+        }
+
+        // 인덱스 범위 확인 함수
+        function indexCheck(value) {
+            // 숫자형인지 확인
+            if (isNumber(value)) {
+                return true;
+            }
+
+            // 인덱스 범위 내에 있는지 확인
+            if (students.length - 1 < value - 1 || value == 0) {
+                alert("인덱스 범위를 벗어났습니다.")
+                return true;
+            }
+        }
+
+        // 정말 삭제할 것인지 또는 수정할 것인지 확인하는 함수
+        function checkDeleteOrModify(value, indexNumber) {
+            // 삭제
+            if (value == '삭제') {
+                if (confirm("정말 삭제하시겠습니까?")) {
+                    students.splice(indexNumber - 1, 1, ["삭제 되었습니다."]);
+                    return alert("삭제 되었습니다!");
+                }
+            }
+            // 수정
+            else if (value == '수정') {
+                //students[studentNumber - 1][key]
+                var tempStudentInfo = {
+                    이름: '',
+                    나이: '',
+                    주소: '',
+                };
+
+                for (var key in tempStudentInfo) {
+                    tempStudentInfo[key] = prompt("수정할 학생의 " + key + "을[를] 입력해주세요.")?.trim();
+                    console.log(tempStudentInfo[key]);
+
+                    // 공백확인
+                    if (blankCheck(tempStudentInfo[key])) { return; }
+                }
+
+                if (confirm("정말 수정하시겠습니까?")) {
+                    students.splice(indexNumber - 1, 1, tempStudentInfo);
+                    
+                    console.log(students);
+                    return alert(indexNumber + "번 학생 정보를 수정하였습니다.");
+                }
+            }
+            alert("취소합니다.");
+            return false;
+
+        }
+    </script>
+</body>
+
+</html>

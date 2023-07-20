@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>toDoList</title>
+    <link rel="stylesheet" href="/toDoList.css">
+</head>
+
+<body>
+    <button><a href="/index.html">메인가기</a></button>
+    <h1>할 일 목록</h1>
+    <h2 id="time"></h2>
+    <div class="input-container">
+        <input type="text" id="todoInput" placeholder="할 일을 적어주세요." value="">
+        <button id="addButton" onclick="addTodoList()">추가</button>
+    </div>
+    <div class="input-container">
+        <input type="date" class="input_date_time">
+        <input type="time" class="input_date_time">
+    </div>
+    <ul id="todoList">
+        <!-- <li><span>안녕하세요!</span><span></span><button onclick="removeTodoList()">삭제</button></li> -->
+    </ul>
+
+    <script>
+
+        // 목록 저장 배열
+        var saveList = [];
+
+        // 목록 객체
+        var listValue = {
+            // saveDate: value,     // 지정한 날짜 저장
+            // saveTime: value,     // 지정한 시간 저장
+            // boolType: false,     // boolType
+            // num: value,          // 해당 객체 번호
+        };
+
+        var listCount = 0;
+
+        // 시간 출력
+        document.getElementById("time").innerHTML = getTodayDateTime();;
+
+        // 오늘 날짜, 현재 시간 저장
+        var todayDate;
+        var timeNow;
+
+
+
+        /* 함수 */
+
+        // 엔터 클릭시 추가되는 함수
+        window.onkeyup = function () {
+            if (event.keyCode == 13) {
+                addTodoList();
+            }
+        }
+
+
+        // 할 일 목록 추가 함수
+        function addTodoList() {
+            // input에 입력한 값을 가져옴
+            var inputText = document.getElementById("todoInput");
+
+            // 공백 검사
+            if (inputText.value == "") {
+                return alert("할 일을 입력하세요!");
+            }
+
+            // 시간 지정했는지 확인
+            if (getSaveDateTimeValue()) { return; }
+
+            // li 생성
+            var addLi = document.createElement("li");
+
+            // li에 데이터 저장
+            addLi.innerHTML = `<span>${inputText.value}</span><span>${saveList[saveList.length - 1].saveDate} ${saveList[saveList.length - 1].saveTime}</span><button onclick="removeTodoList()">삭제</button>`;
+
+            // todoList id에 자손으로 추가
+            document.getElementById("todoList").appendChild(addLi);
+
+            // input 값 초기화
+            clearInput();
+        }
+
+
+        // 삭제 버튼 클릭 시 해당 리스트 삭제
+        function removeTodoList() {
+            // 유사배열 객체를 배열로 변환하여 배열 메서들를 사용하는 방법
+            // 버튼 부모 -> li
+            var buttonParent = event.target.parentElement;
+            
+            // li의 부모의 자식 요소 배열 변환
+            var childrenArray = Array.from(document.getElementById("todoList").children);
+            
+            // 배열로 변환된 childrenArray에 indexOf(해당 이벤트가 발생한 버튼)해서 해당 li의 인덱스를 가져옴
+            var index = childrenArray.indexOf(buttonParent);
+            // == var index = Array.prototype.indexOf.call(document.getElementById("todoList").children, li);
+
+            // 해당 부모 삭제
+            buttonParent.remove();
+            // 해당 li 객체 삭제
+            saveList.splice(index, 1);
+        }
+
+
+        // 현재 date
+        function getTodayDateTime() {
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = today.getMonth() + 1;
+            var day = today.getDate();
+            var hour = today.getHours();
+            var minute = today.getMinutes();
+            var second = today.getSeconds();
+
+            todayDate = `${year}-${formatDateTime(month)}-${formatDateTime(day)}`;
+            timeNow = `${formatDateTime(hour)}:${formatDateTime(minute)}`;
+
+            return `${year}-${formatDateTime(month)}-${formatDateTime(day)} ${formatDateTime(hour)}:${formatDateTime(minute)}:${formatDateTime(second)}`;
+        }
+
+
+        // date를 0000-00-00 00:00:00으로 하기 위함
+        function formatDateTime(dateTime) {
+            return dateTime < 10 ? "0" + dateTime : dateTime;
+        }
+
+
+        // 현재 시간 반복 출력
+        setInterval(function () {
+            var getTimeContainer = document.getElementById("time");
+            getTimeContainer.innerHTML = getTodayDateTime();
+
+            // saveList 배열 크기가 0 이상일 때
+            if (saveList.length > 0) {
+                // 현재 시간 == 지정한 시간, 오늘 날짜 == 지정한 날짜 같을 시
+                for (var i = 0; i < saveList.length; i++) {
+                    if (saveList[i] == "") {
+                        continue;
+                    }
+                    for (var key in saveList[i]) {
+                        if (saveList[i].saveDate == todayDate && saveList[i].saveTime == timeNow && saveList[i].boolType == false) {
+                            saveList[i].boolType = true;
+                            var getLi = document.getElementById("todoList");
+                            getLi.children[i].style.backgroundColor = "black";
+                            getLi.children[i].style.color = "#dbd3d3";
+                            console.log(getLi.children[i]);
+                        }
+                    }
+                }
+            }
+        }, 1000);
+
+
+        // 지정한 시간 저장하는 함수
+        function getSaveDateTimeValue() {
+            var getSaveDateTime = document.getElementsByClassName("input_date_time");
+
+            // 리스트 객체 값 저장
+            listValue = {
+                saveDate: getSaveDateTime[0].value,
+                saveTime: getSaveDateTime[1].value,
+                boolType: false,
+            }
+
+            // 날짜, 시간 지정했는지 검사
+            if (listValue.saveDate == "" || listValue.saveTime == "") {
+                alert("날짜와 시간을 지정해주세요!");
+                return true;
+            }
+
+            saveList.push(listValue);
+            console.log(saveList);
+        }
+
+
+        // 추가 후 인풋 초기화
+        function clearInput() {
+            // inputText 초기화
+            document.getElementById("todoInput").value = "";
+
+            // inputDateTime 초기화
+            document.getElementsByClassName("input_date_time")[0].value = "";
+            document.getElementsByClassName("input_date_time")[1].value = "";
+        }
+    </script>
+</body>
+
+</html>

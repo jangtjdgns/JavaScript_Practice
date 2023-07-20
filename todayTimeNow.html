@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>현재시간</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <button type="butotn"><a href="/index.html">메인가기</a></button>
+    <main>
+        <article class="today_time_now_article">
+            <input type="color" id="change_color" value="#000000">
+            <h1 class="today_time_now_title">현재 시간</h1>
+            <div class="time"></div>
+            <div class="check_box_container">
+                <input type="checkbox" id="check_box">
+                <span>한글</span>
+            </div>
+            <h3 class="select_time_notation_title">시간 표기법 선택</h3>
+            <div class="select_time_notation">
+                <input type="radio" id="hour12" class="hour_notaion" name="time_notaion" value="hour12"
+                    onclick="selectTimeNotaion()" checked>12시간
+                <input type="radio" id="hour24" class="hour_notaion" name="time_notaion" value="hour24"
+                    onclick="selectTimeNotaion()">24시간
+            </div>
+
+            <button type="button" class="buttons" onclick="start()">시작</button>
+            <button type="button" class="buttons" onclick="stop()">중지</button>
+        </article>
+    </main>
+
+
+    <Script>
+        var time = document.getElementsByClassName("time");
+        var interval = setInterval(getClassTime, 50);
+
+        // 시작하자마자 선택된 라디오 가져오기 위해 선언
+        var getRadio = document.getElementsByClassName("hour_notaion");
+        var checkedHour = true;
+
+        var checkBoxParents = document.getElementsByClassName("check_box_container")[0];
+
+        // 12시간 표기법일때 체크박스 표시
+        var showCheckBox;
+
+        /* 함수 */
+
+
+        // 체크된 라디오 타입 확인하는 함수
+        function selectTimeNotaion() {
+            getRadio = document.getElementsByClassName("hour_notaion");
+
+            // 부모 요소 가져오기
+            checkBoxParents = document.getElementsByClassName("check_box_container")[0];
+
+            if (getRadio[0].checked) {
+                checkedHour = true;
+                setDisplay(checkBoxParents.children, true);
+                return;
+            }
+            checkedHour = false;
+            setDisplay(checkBoxParents.children, false);
+        }
+
+        // 디스플레이 설정
+        function setDisplay(children, boolType) {
+            if (boolType) {
+                children[0].style.display = "inline-block";
+                children[1].style.display = "inline-block";
+                return;
+            }
+            children[0].style.display = "none";
+            children[1].style.display = "none";
+        }
+
+
+        function getTimeNow() {
+            var today = new Date();
+            var hour = today.getHours();
+            var minute = today.getMinutes();
+            var second = today.getSeconds();
+
+            if (checkedHour) {
+                return `${check12HourNotation(hour)}:${formatTime(minute)}:${formatTime(second)} ${checkAmPm(hour)}`;
+            }
+            return `${formatTime(hour)}:${formatTime(minute)}:${formatTime(second)}`;
+
+        }
+
+        function formatTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+
+        function check12HourNotation(hour) {
+            return hour < 12 ? formatTime(hour) : formatTime(hour - 12);
+        }
+
+        function checkAmPm(hour) {
+            if (checkBoxParents.children[0].checked) {
+                return hour < 12 ? "오전" : "오후";
+            }
+            return hour < 12 ? "AM" : "PM";
+        }
+
+        function getClassTime() {
+            document.getElementsByClassName("time")[0].innerHTML = getTimeNow();
+            var color = document.getElementById("change_color");
+            var articleWrap = document.getElementsByClassName("today_time_now_article");
+            articleWrap[0].style.color = color.value;
+        }
+
+        function start() {
+            interval = setInterval(getClassTime, 100);
+            setInputEnabled(false);
+        }
+
+        function stop() {
+            clearInterval(interval);
+            setInputEnabled(true);
+        }
+
+        function setInputEnabled(enable) {
+            // true시 멈춤
+            getRadio = document.getElementsByClassName("hour_notaion");
+            if (enable) {
+                getRadio[0].disabled = true;
+                getRadio[1].disabled = true;
+                checkBoxParents.children[0].disabled = true;
+                return;
+            }
+            // false일 시 작동
+            getRadio[0].disabled = false;
+            getRadio[1].disabled = false;
+            checkBoxParents.children[0].disabled = false;
+        }
+    </Script>
+</body>
+
+</html>

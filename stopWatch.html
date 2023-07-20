@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopWatch</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <button type="button"><a href="/index.html">메인가기</a></button>
+    <main>
+        <article class="stop_watch_article">
+            <input type="color" id="change_color" value="#000000">
+            <h1 class="stop_watch_title">스톱워치</h1>
+
+            <div class="stop_watch_container">
+                <div class="stop_watch_timer" id="stop_watch_timer">00:00:00.00</div>
+                <div class="stop_watch_button_container">
+                    <button type="button" onclick="strat()">시작</button>
+                    <button type="button" onclick="stop()">중지</button>
+                    <button type="button" onclick="reset()">초기화</button>
+                </div>
+            </div>
+
+            <h3 class="saveTime_title">
+                <span class>구간</span><span>시간</span>
+            </h3>
+            <div class="saveTime_container"></div>
+            <div class="brief">
+                <span>스페이스바 - 시작 / 중지</span>
+                <span>r - 초기화</span>
+            </div>
+            
+        </article>
+    </main>
+
+    <script>
+        // 스톱워치 시작 값 false 
+        // true -> 멈춤 가능, false -> 작동 가능
+        // 시작, 중지 버튼 연속으로 눌리는 것 방지하기 위함
+        // 멈춤 상태에서 초기화 실행 가능
+        var startStopWatch = false;
+
+        var setTime;        // 반복되는 시간 저장
+        var saveT;          // 시간 중지 시 기록
+        var count = 1;      // 시간 중지 횟수
+
+        var hour = 0        // 시
+        var minute = 0;     // 분
+        var second = 0;     // 초
+        var mSecond = 0;    // 밀리초
+
+        var spacebar = true;    // 스페이스바 상태
+
+        // 스페이스바 누를 때마다 시작, 중지 실행
+        window.onkeyup = function(){
+            if(event.keyCode == 32){
+                // true 시 실행
+                if(spacebar == true){
+                    spacebar = false;
+                    strat();
+                } else{
+                    spacebar = true;
+                    stop();
+                }
+            }
+
+            // r 버튼 누를 시 초기화 -> 중지 상태이어야함
+            else if(event.keyCode == 82){
+                if(spacebar = true){
+                    reset();
+                }
+            }
+        }
+
+
+        // 시간 나타낼 클래스 가져오기
+        function updateTimer() {
+            var getClass = document.getElementsByClassName("stop_watch_timer");
+            getClass[0].innerHTML = getTime();
+            var color = document.getElementById("change_color");
+            var articleWrap = document.getElementsByClassName("stop_watch_article");
+            articleWrap[0].style.color = color.value;
+        }
+
+        function getTime() {
+            mSecond += 1;
+            if (mSecond == 100) {
+                mSecond = 0;
+                second += 1;
+            }
+            if (second == 60) {
+                second = 0;
+                minute += 1;
+            }
+            if (minute == 60) {
+                minute = 0;
+                hour += 1;
+            }
+            saveT = formatTime(hour) + ':' + formatTime(minute) + ':' + formatTime(second) + '.' + formatTime(mSecond);
+            return saveT;
+        }
+
+        function formatTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+
+        function strat() {
+            // false일 때 -> 작동
+            if (startStopWatch == false) {
+                startStopWatch = true;
+                setTime = setInterval(updateTimer, 10);
+            }
+        }
+
+        function stop() {
+            // true일 때 -> 멈춤
+            if (startStopWatch) {
+                startStopWatch = false;
+                clearInterval(setTime);
+                saveTime();
+            }
+        }
+
+        function reset() {
+            // false일 때 -> 멈춤 일 때 -> 초기화 가능
+            if (startStopWatch == false) {
+                hour = 0
+                minute = 0;
+                second = 0;
+                mSecond = 0;
+                document.getElementsByClassName("stop_watch_timer")[0].innerHTML = "00:00:00.00";
+                document.getElementsByClassName("saveTime_container")[0].innerHTML = "";
+                count = 1;
+            }
+        }
+
+        function saveTime() {
+            var sTime = document.createElement("h3");
+            sTime.className = 'stop_watch_save_times';
+            sTime.innerHTML = `<span>${stopCount(count++)}</span><span>${saveT}</span>`;
+            document.getElementsByClassName("saveTime_container")[0].appendChild(sTime);
+        }
+
+        function stopCount(count) {
+            return count < 10 ? "0" + count : count;
+        }
+    </script>
+</body>
+
+</html>

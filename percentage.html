@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage</title>
+    <style>
+        /* percentage */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        body {
+            width: 100vw;
+        }
+
+        .percentage_title {
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .percentage_article {
+            text-align: center;
+            margin: 0 100px;
+        }
+
+        .percentage_article_input_wrap {
+            margin: 20px auto;
+        }
+
+        #input_percentage {
+            width: 200px;
+            padding: 0 10px;
+            height: 40px;
+            font-size: 16px;
+        }
+
+        #change_percent {
+            margin: 0 5px 20px 5px;
+            width: 80px;
+            height: 40px;
+            font-size: 16px;
+            border: 1px solid;
+            color: white;
+            background-color: #4caf50;
+            border-radius: 8px;
+        }
+
+        #change_percent:hover {
+            background-color: #367e38;
+        }
+
+        #percentage_entire {
+            border-radius: 25px;
+            background-color: rgb(187, 185, 185);
+            height: 50px;
+        }
+
+        #percentage_part {
+            height: 50px;
+            width: 100%;
+            border-radius: 25px;
+            background-color: rgb(255, 160, 255);
+            animation: percent 2s 1;
+            position: relative;
+        }
+
+        #gauge_quantity {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(169, 73, 233);
+        }
+
+        /* 12 번째 */
+        @keyframes percent {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button type="button"><a href="/index.html">메인가기</a></button>
+    <main>
+        <h1 class="percentage_title">게이지 표시</h1>
+        <article class="percentage_article">
+            <div class="percentage_article_input_wrap">
+                <input id="input_percentage" type="number" min="0" max="100" placeholder="퍼센트를 적어주세요." vlaue="100">
+                <button id="change_percent" onclick="change()">수치 변경</button>
+            </div>
+            <div id="percentage_entire">
+                <div id="percentage_part">
+                    <p id="gauge_quantity">100%</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        var saveBeforePercent = 100;    // 항상 시작시 width 100%기 때문에 100 지정
+
+        function change() {
+            var percentagePart = document.getElementById("percentage_part");
+            var inputVal = document.getElementById("input_percentage");     // 입력 요소 가져오기
+            var inputPercent = inputVal.value;                              // 입력 값 넣기
+
+            inputVal.value = "";
+
+            // 0 ~ 100 사이 숫자
+            if(inputPercent > 100 || inputPercent < 0 || inputPercent == ""){
+                return;
+            }
+
+            /* 애니메이션 */
+            // css 9번째 keyframes 가져오기
+            var animation = document.styleSheets[0].cssRules[12];
+            // 삭제
+            animation.deleteRule("from");
+            animation.deleteRule("to");
+            // 추가
+            animation.appendRule('from { width: ' + saveBeforePercent + '%; }');    // 이전 위치
+            animation.appendRule('to { width: ' + inputPercent + '%; }');
+
+            // 이전 시간 저장
+            saveBeforePercent = inputPercent;
+
+            // 퍼센트 게이지 보여주기
+            document.getElementById("gauge_quantity").innerText = inputPercent + "%";
+            percentagePart.style.width = inputPercent + "%";
+
+
+            // 애니메이션 효과를 받으려면 display none 후 다시 block으로 해야함
+            percentagePart.style.display = "none";
+
+            // 1ms
+            setTimeout(function () {
+                percentagePart.style.display = "block";
+            }, 1);
+        }
+
+    </script>
+</body>
+
+</html>

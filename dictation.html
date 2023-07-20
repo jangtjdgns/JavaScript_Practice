@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dictation</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <button type="button"><a href="/index.html">메인가기</a></button>
+    <main>
+        <article class="dictation_article">
+            <div class="read_field">
+                <h1>따라쓰기</h1>
+                <div id="read_content"></div>
+            </div>
+
+            <div class="write_field">
+                <h1>따라쓰는 칸</h1>
+                <textarea name="" id="write_content" cols="30" rows="10" spellcheck="false"></textarea>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        var str = "어둠 속에 빛을 찾는다면 어떨까요? 작은 등불이 되어 어둠을 밝혀주고, 따스한 미소로 사람들의 마음을 따뜻하게 만들 수 있을 거예요. 용기와 희망으로 가득한 하루를 시작해보세요. 어려운 일이 있더라도 포기하지 말고 극복해 나갈 수 있을 거예요. 마음의 작은 소리를 들어주고, 마주하는 순간들을 소중히 여기며 살아갈 수 있기를 바랄게요. 모든 것이 잘 풀리고 행복한 순간들이 가득하길 소망합니다.";
+        var strArr = [];
+        var readFieldValue = document.getElementById("read_content");
+
+        for (var i = 0; i < str.length; i++) {
+            strArr.push(str[i]);
+            var setReadContents = document.createElement("span");
+            setReadContents.className = "read_contents";
+            setReadContents.innerHTML = str[i];
+            readFieldValue.appendChild(setReadContents);
+        }
+
+
+        setInterval(function () {
+            var getWriteField = document.getElementById("write_content");
+            var getReadContent = document.getElementsByClassName("read_contents");
+
+            for (var i = 0; i < getWriteField.value.length; i++) {
+                if (getWriteField.value[i] == strArr[i]) {
+                    getReadContent[i].style.backgroundColor = "green";
+                    getReadContent[i].style.color = "white";
+                } else{
+                    getReadContent[i].style.backgroundColor = "red";
+                    getReadContent[i].style.color = "white";
+                }
+            }
+        }, 500)
+    </script>
+</body>
+
+</html>
