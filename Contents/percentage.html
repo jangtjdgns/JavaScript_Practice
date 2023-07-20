@@ -115,6 +115,14 @@
     <script>
         var saveBeforePercent = 100;    // 항상 시작시 width 100%기 때문에 100 지정
 
+        // 엔터키 클릭 시
+        document.addEventListener("keyup", function (event){
+            if(event.keyCode == 13){
+                change();
+            }
+        });
+
+
         function change() {
             var percentagePart = document.getElementById("percentage_part");
             var inputVal = document.getElementById("input_percentage");     // 입력 요소 가져오기
@@ -123,7 +131,7 @@
             inputVal.value = "";
 
             // 0 ~ 100 사이 숫자
-            if(inputPercent > 100 || inputPercent < 0 || inputPercent == ""){
+            if (inputPercent > 100 || inputPercent < 0 || inputPercent == "") {
                 return;
             }
 
