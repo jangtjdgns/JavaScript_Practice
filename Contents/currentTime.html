@@ -21,9 +21,9 @@
     </header>
 
     <main>
-        <article class="today_time_now_article">
+        <article class="currentTime_article">
             <input type="color" id="change_color" value="#000000">
-            <h1 class="today_time_now_title">현재 시간</h1>
+            <h1 class="currentTime_title">현재 시간</h1>
             <div class="time"></div>
             <div class="check_box_container">
                 <input type="checkbox" id="check_box">
@@ -118,7 +118,7 @@
         function getClassTime() {
             document.getElementsByClassName("time")[0].innerHTML = getTimeNow();
             var color = document.getElementById("change_color");
-            var articleWrap = document.getElementsByClassName("today_time_now_article");
+            var articleWrap = document.getElementsByClassName("currentTime_article");
             articleWrap[0].style.color = color.value;
         }
 

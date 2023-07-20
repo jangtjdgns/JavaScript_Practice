@@ -74,21 +74,21 @@ article {
 
 
 
-/* 3. todayTimeNow */
-.today_time_now_article {
+/* 3. currentTime */
+.currentTime_article {
     text-align: center;
     border: 2px solid;
 }
 
-.today_time_now_article .today_time_now_title {
+.currentTime_article .currentTime_title {
     margin: 10px 0;
 }
 
-.today_time_now_article>.time {
+.currentTime_article>.time {
     font-size: 50px;
 }
 
-.today_time_now_article .check_box_container {
+.currentTime_article .check_box_container {
     display: flex;
     width: 70px;
     flex-direction: row;
@@ -98,16 +98,16 @@ article {
     font-size: 20px;
 }
 
-.today_time_now_article #check_box {
+.currentTime_article #check_box {
     zoom: 1.5;
 }
 
-.today_time_now_article .select_time_notation_title {
+.currentTime_article .select_time_notation_title {
     width: 100%;
     margin: 20px 0 10px 0;
 }
 
-.today_time_now_article .select_time_notation {
+.currentTime_article .select_time_notation {
     margin: 0 0 30px 0;
     display: flex;
     flex-direction: row;
@@ -116,12 +116,12 @@ article {
     font-size: 20px;
 }
 
-.today_time_now_article .select_time_notation>input {
+.currentTime_article .select_time_notation>input {
     margin: 0 5px;
     zoom: 1.5;
 }
 
-.today_time_now_article>button {
+.currentTime_article>button {
     margin: 0 5px 20px 5px;
     width: 70px;
     height: 40px;
@@ -131,7 +131,7 @@ article {
     background-color: #4caf50;
 }
 
-.today_time_now_article>button:hover {
+.currentTime_article>button:hover {
     background-color: #367e38;
 }
 
