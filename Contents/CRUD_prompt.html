@@ -9,6 +9,16 @@
 </head>
 
 <body>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
     <button type="button"><a href="/index.html">메인가기</a></button>
     <br><br>
     <button type="button" onclick="addStudent()">학생 추가</button>
@@ -181,7 +191,7 @@
 
                 if (confirm("정말 수정하시겠습니까?")) {
                     students.splice(indexNumber - 1, 1, tempStudentInfo);
-                    
+
                     console.log(students);
                     return alert(indexNumber + "번 학생 정보를 수정하였습니다.");
                 }

@@ -5,84 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Percentage</title>
+    <link rel="stylesheet" href="../CSS/style.css">
     <style>
-        /* percentage */
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        body {
-            width: 100vw;
-        }
-
-        .percentage_title {
-            margin: 10px auto;
-            text-align: center;
-        }
-
-        .percentage_article {
-            text-align: center;
-            margin: 0 100px;
-        }
-
-        .percentage_article_input_wrap {
-            margin: 20px auto;
-        }
-
-        #input_percentage {
-            width: 200px;
-            padding: 0 10px;
-            height: 40px;
-            font-size: 16px;
-        }
-
-        #change_percent {
-            margin: 0 5px 20px 5px;
-            width: 80px;
-            height: 40px;
-            font-size: 16px;
-            border: 1px solid;
-            color: white;
-            background-color: #4caf50;
-            border-radius: 8px;
-        }
-
-        #change_percent:hover {
-            background-color: #367e38;
-        }
-
-        #percentage_entire {
-            border-radius: 25px;
-            background-color: rgb(187, 185, 185);
-            height: 50px;
-        }
-
-        #percentage_part {
-            height: 50px;
-            width: 100%;
-            border-radius: 25px;
-            background-color: rgb(255, 160, 255);
-            animation: percent 2s 1;
-            position: relative;
-        }
-
-        #gauge_quantity {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            font-weight: bold;
-            color: rgb(169, 73, 233);
-        }
-
-        /* 12 번째 */
+        /* 애니메이션 */
         @keyframes percent {
             from {
                 width: 0;
@@ -96,10 +21,20 @@
 </head>
 
 <body>
-    <button type="button"><a href="/index.html">메인가기</a></button>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-        <h1 class="percentage_title">게이지 표시</h1>
         <article class="percentage_article">
+            <p class="percentage_title">게이지 표시</p>
             <div class="percentage_article_input_wrap">
                 <input id="input_percentage" type="number" min="0" max="100" placeholder="퍼센트를 적어주세요." vlaue="100">
                 <button id="change_percent" onclick="change()">수치 변경</button>
@@ -109,6 +44,7 @@
                     <p id="gauge_quantity">100%</p>
                 </div>
             </div>
+            <p class="refer">*게이지 이동 시간 1s</p>
         </article>
     </main>
 
@@ -116,8 +52,8 @@
         var saveBeforePercent = 100;    // 항상 시작시 width 100%기 때문에 100 지정
 
         // 엔터키 클릭 시
-        document.addEventListener("keyup", function (event){
-            if(event.keyCode == 13){
+        document.addEventListener("keyup", function (event) {
+            if (event.keyCode == 13) {
                 change();
             }
         });
@@ -129,15 +65,16 @@
             var inputPercent = inputVal.value;                              // 입력 값 넣기
 
             inputVal.value = "";
+            inputVal.disabled = true;
 
             // 0 ~ 100 사이 숫자
-            if (inputPercent > 100 || inputPercent < 0 || inputPercent == "") {
-                return;
+            if (inputPercent > 100 || inputPercent < 0 || inputPercent == "" || inputPercent == saveBeforePercent) {
+                return inputVal.disabled = false;
             }
 
             /* 애니메이션 */
             // css 9번째 keyframes 가져오기
-            var animation = document.styleSheets[0].cssRules[12];
+            var animation = document.styleSheets[1].cssRules[0];
             // 삭제
             animation.deleteRule("from");
             animation.deleteRule("to");
@@ -160,6 +97,10 @@
             setTimeout(function () {
                 percentagePart.style.display = "block";
             }, 1);
+
+            setTimeout(function () {
+                inputVal.disabled = false;
+            }, 1000);
         }
 
     </script>

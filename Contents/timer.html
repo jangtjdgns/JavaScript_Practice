@@ -9,7 +9,17 @@
 </head>
 
 <body>
-    <button><a href="/index.html">메인가기</a></button>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
         <article class="timer_article">
             <h1 class="timer_article_title">타이머</h1>
@@ -97,7 +107,7 @@
             var getTimer = document.getElementById("timer");
             if (hour == 0 && minute == 0 && second == 0 && mSecond == 0) {
                 stop();
-                alert ("시간 종료!!");
+                alert("시간 종료!!");
                 return;
             }
             getTimer.innerHTML = getTime();

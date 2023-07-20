@@ -9,7 +9,17 @@
 </head>
 
 <body>
-    <button type="button"><a href="/index.html">메인가기</a></button>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
         <article class="stop_watch_article">
             <input type="color" id="change_color" value="#000000">
@@ -32,7 +42,7 @@
                 <span>스페이스바 - 시작 / 중지</span>
                 <span>r - 초기화</span>
             </div>
-            
+
         </article>
     </main>
 
@@ -55,21 +65,21 @@
         var spacebar = true;    // 스페이스바 상태
 
         // 스페이스바 누를 때마다 시작, 중지 실행
-        window.onkeyup = function(){
-            if(event.keyCode == 32){
+        window.onkeyup = function () {
+            if (event.keyCode == 32) {
                 // true 시 실행
-                if(spacebar == true){
+                if (spacebar == true) {
                     spacebar = false;
                     strat();
-                } else{
+                } else {
                     spacebar = true;
                     stop();
                 }
             }
 
             // r 버튼 누를 시 초기화 -> 중지 상태이어야함
-            else if(event.keyCode == 82){
-                if(spacebar = true){
+            else if (event.keyCode == 82) {
+                if (spacebar = true) {
                     reset();
                 }
             }

@@ -5,24 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>toDoList</title>
-    <link rel="stylesheet" href="../CSS/toDoList.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
-<body>
-    <button><a href="/index.html">메인가기</a></button>
-    <h1>할 일 목록</h1>
-    <h2 id="time"></h2>
-    <div class="input-container">
-        <input type="text" id="todoInput" placeholder="할 일을 적어주세요." value="">
-        <button id="addButton" onclick="addTodoList()">추가</button>
-    </div>
-    <div class="input-container">
-        <input type="date" class="input_date_time">
-        <input type="time" class="input_date_time">
-    </div>
-    <ul id="todoList">
-        <!-- <li><span>안녕하세요!</span><span></span><button onclick="removeTodoList()">삭제</button></li> -->
-    </ul>
+<body id="toDoList">
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article class="to_do_list_article">
+            <h1>할 일 목록</h1>
+            <h2 id="time"></h2>
+            <div class="input-container">
+                <input type="text" id="todoInput" placeholder="할 일을 적어주세요." value="">
+                <button id="addButton" onclick="addTodoList()">추가</button>
+            </div>
+            <div class="input-container">
+                <input type="date" class="input_date_time">
+                <input type="time" class="input_date_time">
+            </div>
+            <ul id="todoList">
+                <!-- <li><span>안녕하세요!</span><span></span><button onclick="removeTodoList()">삭제</button></li> -->
+            </ul>
+        </article>
+    </main>
 
     <script>
 

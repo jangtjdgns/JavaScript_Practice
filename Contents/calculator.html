@@ -9,7 +9,17 @@
 </head>
 
 <body>
-    <button type="button"><a href="/index.html">메인가기</a></button>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>S
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
         <article class="calculator_article">
             <div class="calculator_container">
@@ -79,9 +89,9 @@
                 }
                 setNumber.push(tNum);
 
-                if(textVal == '+'){
+                if (textVal == '+') {
                     var sum = 0;
-                    for(var i = 0; i < setNumber.length; i++){
+                    for (var i = 0; i < setNumber.length; i++) {
                         sum += setNumber[i];
                     }
                     return console.log(sum);

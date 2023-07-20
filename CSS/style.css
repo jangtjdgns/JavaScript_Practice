@@ -15,11 +15,21 @@ a {
     color: black;
 }
 
-body {
-    width: 100%;
+.main_title_header {
+    font-family: 'ONE-Mobile-Title';
 }
 
-/* index */
+body {
+    width: 100vw;
+}
+
+article {
+    border: 2px solid;
+    margin: 10px;
+    padding: 20px;
+}
+
+/* Home. index */
 #index {
     font-family: 'ONE-Mobile-Title';
 }
@@ -41,18 +51,12 @@ body {
     padding: 5px 10px;
 }
 
-.main_nav>ul>li:hover{
+.main_nav>ul>li:hover {
     background-color: rgb(117, 99, 99);
 }
 
 .main_nav>ul>li>a {
     color: white;
-}
-
-.contents_article{
-    border: 2px solid;
-    margin: 10px;
-    padding: 20px;
 }
 
 .section_container {
@@ -70,11 +74,9 @@ body {
 
 
 
-/*todayTimeNow*/
+/* 3. todayTimeNow */
 .today_time_now_article {
-    width: 500px;
     text-align: center;
-    margin: 10px auto;
     border: 2px solid;
 }
 
@@ -135,13 +137,10 @@ body {
 
 
 
-/* stopWatch */
+/* 4. stopWatch */
 .stop_watch_article {
-    width: 500px;
     height: 530px;
     text-align: center;
-    margin: 10px auto;
-    border: 2px solid;
 }
 
 .stop_watch_article .stop_watch_title {
@@ -183,7 +182,7 @@ body {
     font-size: 30px;
     display: flex;
     justify-content: center;
-    width: 90%;
+    width: 100 %;
     border-bottom: 2px solid;
     padding-bottom: 10px;
 }
@@ -193,8 +192,10 @@ body {
 }
 
 .stop_watch_article .saveTime_container {
-    height: 220px;
+    height: 200px;
     overflow: auto;
+
+    border-bottom: 2px solid;
 }
 
 .stop_watch_article .stop_watch_save_times {
@@ -218,12 +219,8 @@ body {
 
 
 
-/* timer */
+/* 5. timer */
 .timer_article {
-    border: 2px solid;
-    width: 500px;
-    margin: 10px auto;
-    padding: 20px 0;
     text-align: center;
 }
 
@@ -231,18 +228,15 @@ body {
     margin: 5px 0 30px 0;
 }
 
-.timer_article .input_time_wrap {
-    scale: 1.2;
-}
-
 .timer_article .input_time_wrap>input {
-    width: 50px;
-    height: 30px;
-    font-size: 20px;
+    width: 55px;
+    height: 40px;
+    font-size: 30px;
 }
 
 .timer_article .input_time_wrap>span {
     font-weight: bold;
+    font-size: 26px;
 }
 
 .timer_article .input_time {
@@ -290,12 +284,78 @@ body {
 
 
 
-/* dictaion */
+/* 6. toDoList */
+#toDoList {
+    font-family: Arial, sans-serif;
+}
+
+.to_do_list_article h1 {
+    color: #333;
+    text-align: center;
+}
+
+.to_do_list_article #time {
+    text-align: center;
+}
+
+.to_do_list_article .input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.to_do_list_article #todoInput {
+    padding: 8px;
+    width: 250px;
+}
+
+.to_do_list_article #addButton {
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.to_do_list_article .input_date_time {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 5px;
+    padding: 0 17px;
+}
+
+.to_do_list_article #todoList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.to_do_list_article li {
+    margin-bottom: 5px;
+    padding: 8px;
+    background-color: #dbd3d3;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.to_do_list_article li span {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.to_do_list_article li button {
+    padding: 4px 8px;
+    margin: 0 5px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+/* 7. dictaion */
 .dictation_article {
-    border: 2px solid;
-    width: 700px;
-    margin: 10px auto;
-    padding: 20px 0;
     text-align: center;
 }
 
@@ -328,12 +388,14 @@ body {
 
 
 
-/* calculator */
+/* 8. calculator */
 .calculator_article {
+    text-align: center;
+}
+
+.calculator_article .calculator_container {
     border: 2px solid;
-    width: 500px;
-    height: 600px;
-    margin: 10px auto;
+    padding: 10px 20px;
 }
 
 .calculator_article .calculator_container {
@@ -372,4 +434,76 @@ body {
     height: 60px;
     text-align: center;
     font-size: 32px;
+}
+
+
+
+
+/* 9. percentage */
+.percentage_title {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.percentage_article {
+    text-align: center;
+}
+
+.percentage_article_input_wrap {
+    margin: 20px auto;
+}
+
+#input_percentage {
+    width: 200px;
+    padding: 0 10px;
+    height: 40px;
+    font-size: 16px;
+}
+
+#change_percent {
+    margin: 0 5px 20px 5px;
+    width: 80px;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid;
+    color: white;
+    background-color: #4caf50;
+    border-radius: 8px;
+}
+
+#change_percent:hover {
+    background-color: #367e38;
+}
+
+#percentage_entire {
+    border-radius: 25px;
+    background-color: rgb(187, 185, 185);
+    height: 50px;
+    margin: 0 150px;
+}
+
+#percentage_part {
+    height: 50px;
+    width: 100%;
+    border-radius: 25px;
+    background-color: rgb(255, 160, 255);
+    animation: percent 1s 1;
+    position: relative;
+}
+
+#gauge_quantity {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(169, 73, 233);
+}
+
+.percentage_article .refer{
+    margin: 20px 0 0 0;
+    font-weight: bold;
 }
