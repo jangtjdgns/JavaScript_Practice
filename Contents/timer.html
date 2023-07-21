@@ -6,6 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer</title>
     <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="shortcut icon" href="#">
+    <style>
+        @-webkit-keyframes shake-bottom {
+
+            0%,
+            100% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+                -webkit-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+            }
+
+            10% {
+                -webkit-transform: rotate(2deg);
+                transform: rotate(2deg);
+            }
+
+            20%,
+            40%,
+            60% {
+                -webkit-transform: rotate(-4deg);
+                transform: rotate(-4deg);
+            }
+
+            30%,
+            50%,
+            70% {
+                -webkit-transform: rotate(4deg);
+                transform: rotate(4deg);
+            }
+
+            80% {
+                -webkit-transform: rotate(-2deg);
+                transform: rotate(-2deg);
+            }
+
+            90% {
+                -webkit-transform: rotate(2deg);
+                transform: rotate(2deg);
+            }
+        }
+
+        @keyframes shake-bottom {
+
+            0%,
+            100% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+                -webkit-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+            }
+
+            10% {
+                -webkit-transform: rotate(2deg);
+                transform: rotate(2deg);
+            }
+
+            20%,
+            40%,
+            60% {
+                -webkit-transform: rotate(-4deg);
+                transform: rotate(-4deg);
+            }
+
+            30%,
+            50%,
+            70% {
+                -webkit-transform: rotate(4deg);
+                transform: rotate(4deg);
+            }
+
+            80% {
+                -webkit-transform: rotate(-2deg);
+                transform: rotate(-2deg);
+            }
+
+            90% {
+                -webkit-transform: rotate(2deg);
+                transform: rotate(2deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -30,11 +112,14 @@
             </div>
             <button type="button" class="time_input_button" onclick="getInputTime()">입력</button>
 
-            <div id="timer">00:00:00.00</div>
+            <div class="timer_wrap ">
+                <p id="timer">00:00:00.00</p>
+            </div>
 
             <button type="button" class="buttons" onclick="strat()">시작</button>
             <button type="button" class="buttons" onclick="stop()">중지</button>
             <button type="button" class="buttons" onclick="reset()">초기화</button>
+            <p class="refer">*타이머가 끝나고 알람이 울릴 때 초기화 버튼을 누르면 멈춤</p>
         </article>
     </main>
     <script>
@@ -103,14 +188,32 @@
             }
         }
 
+        var timeOutInterval;
+        var finishAudio = new Audio("/sound/timer알림소리.mp3");
+        finishAudio.loop = false;
+
         function updateTimer() {
-            var getTimer = document.getElementById("timer");
+            timer = document.getElementById("timer");
             if (hour == 0 && minute == 0 && second == 0 && mSecond == 0) {
                 stop();
-                alert("시간 종료!!");
+                finishAudio.play();
+                timer.style.cssText =
+                    "-webkit-animation: shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both; animation: shake-bottom 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;";
+                timeOutInterval = setInterval(function () {
+                    finishAudio.play();
+                    timeOut(timer);
+                }, 2000);
                 return;
             }
-            getTimer.innerHTML = getTime();
+
+            timer.innerHTML = getTime();
+        }
+
+        function timeOut(timer) {
+            timer.style.display = "none";
+            setTimeout(function () {
+                timer.style.display = "block";
+            }, 1);
         }
 
         function getTime() {
@@ -151,6 +254,8 @@
                 second = 0;
                 mSecond = 0;
                 document.getElementById("timer").innerHTML = "00:00:00.00";
+                clearInterval(timeOutInterval);
+                finishAudio.pause();
             }
         }
 

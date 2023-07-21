@@ -263,8 +263,14 @@ article {
     background-color: #367e38;
 }
 
+.timer_article .timer_wrap{
+    height: 100px;
+}
+
 .timer_article #timer {
     font-size: 70px;
+    margin: 0 auto;
+    width: 50%;
 }
 
 .timer_article .buttons {
@@ -282,7 +288,10 @@ article {
     background-color: #367e38;
 }
 
-
+.timer_article .refer{
+    margin: 20px 0 0 0;
+    font-weight: bold;
+}
 
 /* 6. toDoList */
 #toDoList {
