@@ -20,7 +20,7 @@ a {
 }
 
 body {
-    width: 100vw;
+    width: 100%;
 }
 
 article {
@@ -182,7 +182,7 @@ article {
     font-size: 30px;
     display: flex;
     justify-content: center;
-    width: 100 %;
+    width: 100%;
     border-bottom: 2px solid;
     padding-bottom: 10px;
 }
@@ -504,6 +504,27 @@ article {
 }
 
 .percentage_article .refer{
+    margin: 20px 0 0 0;
+    font-weight: bold;
+}
+
+
+
+/* 10. draw */
+.paint_article{
+    text-align: center;
+}
+
+.paint_article h1{
+    margin: 10px 0 20px 0;
+}
+
+.paint_article #box{
+    margin: 0 auto;
+    border: 1px solid;
+}
+
+.paint_article .refer{
     margin: 20px 0 0 0;
     font-weight: bold;
 }
