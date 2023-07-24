@@ -15,12 +15,64 @@ a {
     color: black;
 }
 
-.main_title_header {
-    font-family: 'ONE-Mobile-Title';
-}
-
 body {
     width: 100%;
+}
+
+/* 사이드 메뉴 바 */
+#side_menu_bar {
+    position: relative;
+}
+
+#side_menu_bar .side_menus {
+    width: 250px;
+    height: auto;
+    border: 1px solid;
+    position: absolute;
+    top: 0;
+    /* border가 1px 이기때문에 -252px 줌 양쪽 1px씩*/
+    left: -252px;
+    animation: sidebar 1s 1;
+    background-color: white;
+}
+
+#side_menu_bar .side_menus>div {
+    position: relative;
+}
+
+#side_menu_bar .side_menus>div #side_menu_bar_btn {
+    width: 30px;
+    height: 50px;
+    position: absolute;
+    top: 30px;
+    left: 250px;
+}
+
+#side_menu_bar .side_menus>div #side_menu_bar_btn:hover {
+    animation: sidebarBtn 1s 1;
+    width: 50px;
+    cursor: pointer;
+}
+
+#side_menu_bar .side_menus a {
+    display: block;
+    margin: 20px;
+    padding: 10px 20px;
+    text-align: left;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+#side_menu_bar .side_menus a:hover {
+    background-color: #d4d4d4;
+}
+
+/* 사이드 메뉴 바 */
+
+
+.main_title_header {
+    font-family: 'ONE-Mobile-Title';
 }
 
 article {
@@ -263,7 +315,7 @@ article {
     background-color: #367e38;
 }
 
-.timer_article .timer_wrap{
+.timer_article .timer_wrap {
     height: 100px;
 }
 
@@ -288,7 +340,7 @@ article {
     background-color: #367e38;
 }
 
-.timer_article .refer{
+.timer_article .refer {
     margin: 20px 0 0 0;
     font-weight: bold;
 }
@@ -512,7 +564,7 @@ article {
     color: rgb(169, 73, 233);
 }
 
-.percentage_article .refer{
+.percentage_article .refer {
     margin: 20px 0 0 0;
     font-weight: bold;
 }
@@ -520,20 +572,20 @@ article {
 
 
 /* 10. draw */
-.paint_article{
+.paint_article {
     text-align: center;
 }
 
-.paint_article h1{
+.paint_article h1 {
     margin: 10px 0 20px 0;
 }
 
-.paint_article #box{
+.paint_article #box {
     margin: 0 auto;
     border: 1px solid;
 }
 
-.paint_article .refer{
+.paint_article .refer {
     margin: 20px 0 0 0;
     font-weight: bold;
 }

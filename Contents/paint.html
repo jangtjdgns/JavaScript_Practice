@@ -53,7 +53,6 @@
     drawBox.addEventListener("mouseup", function () { drawing = false; });
     // 마우스 캔버스 벗어날 시
     drawBox.addEventListener("mouseover", function () { drawing = false; });
-
     // 마우스 움직일때
     drawBox.addEventListener("mousemove", function (event) {
         if (drawing) {
@@ -71,7 +70,7 @@
     }
 
     // 브러쉬 크기 변경
-    document.getElementById("brush_size").addEventListener("change", function(){
+    document.getElementById("brush_size").addEventListener("change", function () {
         brushSize = brush_size.value;
     });
 
