@@ -32,7 +32,6 @@ body {
     top: 0;
     /* border가 1px 이기때문에 -252px 줌 양쪽 1px씩*/
     left: -252px;
-    animation: sidebar 1s 1;
     background-color: white;
 }
 
@@ -46,10 +45,10 @@ body {
     position: absolute;
     top: 30px;
     left: 250px;
+    transition: width 1s;
 }
 
 #side_menu_bar .side_menus>div #side_menu_bar_btn:hover {
-    animation: sidebarBtn 1s 1;
     width: 50px;
     cursor: pointer;
 }

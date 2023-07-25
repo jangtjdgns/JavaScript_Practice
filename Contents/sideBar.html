@@ -6,18 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sideBar</title>
     <link rel="stylesheet" href="/CSS/style.css">
-    <style>
-        @keyframes sidebar {}
-        @keyframes sidebarBtn {
-            from {
-                width: 30px;
-            }
-
-            to {
-                width: 50px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -58,40 +46,17 @@
 
         sideMenuBtn.addEventListener("click", function () {
             var sideMenuBar = document.querySelector("#side_menu_bar .side_menus");
-            var animation = document.styleSheets[1].cssRules;
 
-            // 메뉴바
-            setCss(animation[0], sideMenuBar, isMovedSideMenuBar);
-
-            isMovedSideMenuBar ? isMovedSideMenuBar = false : isMovedSideMenuBar = true;
-
-            // 1ms
-            setTimeout(function () {
-                sideMenuBar.style.display = "block";
-            }, 1);
-        });
-
-        function setCss(animation, sideMenuBar, isMoved) {
-            var from = 0;
-            var to = 0;
-
-            if (isMoved == false) {
-                from = -252;
-                to = 0;
+            if(isMovedSideMenuBar == false) {
                 sideMenuBar.style.left = "0";
-            } else {
-                from = 0;
-                to = -252;
+                isMovedSideMenuBar = true
+            } else{
                 sideMenuBar.style.left = "-252px";
+                isMovedSideMenuBar = false;
             }
 
-            animation.deleteRule("from");
-            animation.deleteRule("to");
-
-            animation.appendRule(`from { left: ${from}px; }`);
-            animation.appendRule(`to { left: ${to}; }`);
-            return sideMenuBar.style.display = "none";
-        }
+            sideMenuBar.style.transition = "left 1s";
+        });
 
     </script>
 </body>
