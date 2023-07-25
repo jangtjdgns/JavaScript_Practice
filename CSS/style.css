@@ -501,8 +501,7 @@ article {
 
 /* 9. percentage */
 .percentage_title {
-    margin: 30px 0;
-    text-align: center;
+    margin: 25px 0;
     font-size: 40px;
     font-weight: bold;
 }
@@ -511,30 +510,39 @@ article {
     text-align: center;
 }
 
-.percentage_article_input_wrap {
-    margin: 20px auto;
+.percentage_article_input_wrap{
+    margin-bottom: 50px;
+}
+
+.percentage_article_input_wrap>div {
+    padding: 10px;
 }
 
 #input_percentage {
     width: 200px;
-    padding: 0 10px;
-    height: 40px;
+    padding: 10px;
     font-size: 16px;
+    border: 2px solid #4caf50;
+    border-radius: 8px;
 }
 
 #change_percent {
-    margin: 0 5px 20px 5px;
+    padding: 10px 0;
     width: 80px;
-    height: 40px;
     font-size: 16px;
-    border: 1px solid;
     color: white;
     background-color: #4caf50;
+    border: 1px solid;
     border-radius: 8px;
 }
 
 #change_percent:hover {
     background-color: #367e38;
+}
+
+.percentage_article_input_wrap>span {
+    font-weight: bold;
+    color: white;
 }
 
 #percentage_entire {
@@ -551,6 +559,17 @@ article {
     background-color: rgb(255, 160, 255);
     animation: percent 1s 1;
     position: relative;
+}
+
+/* 시작시에만 */
+@keyframes percent {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
 }
 
 #gauge_quantity {

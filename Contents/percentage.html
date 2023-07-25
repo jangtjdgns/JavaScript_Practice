@@ -6,18 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Percentage</title>
     <link rel="stylesheet" href="../CSS/style.css">
-    <style>
-        /* 애니메이션 */
-        @keyframes percent {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -36,8 +24,11 @@
         <article class="percentage_article">
             <p class="percentage_title">게이지 표시</p>
             <div class="percentage_article_input_wrap">
-                <input id="input_percentage" type="number" min="0" max="100" placeholder="퍼센트를 적어주세요." vlaue="100">
-                <button id="change_percent" onclick="change()">수치 변경</button>
+                <span id="invalid_range_number">* 1 ~ 100 사이의 숫자만 입력하세요!</span>
+                <div>
+                    <input id="input_percentage" type="number" min="0" max="100" placeholder="퍼센트를 적어주세요." vlaue="100">
+                    <button id="change_percent" onclick="change()">수치 변경</button>
+                </div>
             </div>
             <div id="percentage_entire">
                 <div id="percentage_part">
@@ -49,8 +40,6 @@
     </main>
 
     <script>
-        var saveBeforePercent = 100;    // 항상 시작시 width 100%기 때문에 100 지정
-
         // 엔터키 클릭 시
         document.addEventListener("keyup", function (event) {
             if (event.keyCode == 13) {
@@ -58,49 +47,29 @@
             }
         });
 
-
         function change() {
             var percentagePart = document.getElementById("percentage_part");
-            var inputVal = document.getElementById("input_percentage");     // 입력 요소 가져오기
-            var inputPercent = inputVal.value;                              // 입력 값 넣기
+            var inputVal = document.getElementById("input_percentage").value;
+            
+            // 숫자 입력 후 입력란 리셋
+            input_percentage.value = "";
 
-            inputVal.value = "";
-            inputVal.disabled = true;
+            // 숫자 범위 벗어났는지 확인 용도 -> 평소에 흰색
+            document.getElementById("invalid_range_number").style.color = "white";
 
             // 0 ~ 100 사이 숫자
-            if (inputPercent > 100 || inputPercent < 0 || inputPercent == "" || inputPercent == saveBeforePercent) {
-                return inputVal.disabled = false;
+            if (inputVal > 100 || inputVal < 0 || inputVal == "") {
+                // 범위 벗어 날 시 경고 -> 빨간색
+                return invalid_range_number.style.color = "red";
             }
 
-            /* 애니메이션 */
-            // css 9번째 keyframes 가져오기
-            var animation = document.styleSheets[1].cssRules[0];
-            // 삭제
-            animation.deleteRule("from");
-            animation.deleteRule("to");
-            // 추가
-            animation.appendRule('from { width: ' + saveBeforePercent + '%; }');    // 이전 위치
-            animation.appendRule('to { width: ' + inputPercent + '%; }');
+            // 게이지 몇퍼 인지 보여주기
+            document.getElementById("gauge_quantity").innerText = inputVal + "%";
 
-            // 이전 시간 저장
-            saveBeforePercent = inputPercent;
-
-            // 퍼센트 게이지 보여주기
-            document.getElementById("gauge_quantity").innerText = inputPercent + "%";
-            percentagePart.style.width = inputPercent + "%";
-
-
-            // 애니메이션 효과를 받으려면 display none 후 다시 block으로 해야함
-            percentagePart.style.display = "none";
-
-            // 1ms
-            setTimeout(function () {
-                percentagePart.style.display = "block";
-            }, 1);
-
-            setTimeout(function () {
-                inputVal.disabled = false;
-            }, 1000);
+            // width 변경
+            percentagePart.style.width = inputVal + "%";
+            // 변경된 width로 1초동안 움직임
+            percentagePart.style.transition = "width 1s";
         }
 
     </script>
