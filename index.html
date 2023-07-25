@@ -9,17 +9,9 @@
 </head>
 
 <body id="index">
-    <header class="main_title_header">
-        <h1 class="main_title">JavaScript 이것저것</h1>
-        <nav class="main_nav">
-            <ul>
-                <li><a href="/index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Another</a></li>
-            </ul>
-        </nav>
-    </header>
-    
+    <aside></aside>
+    <header></header>
+
     <main>
         <article class="contents_article">
             <p class="sub_title"><a href="/Contents/CRUD_prompt.html">1. CRUD_prompt</a></p>
@@ -39,6 +31,43 @@
     <footer>
 
     </footer>
+
+    <script>
+        const aside = document.querySelector('aside');
+        const header = document.querySelector('header');
+
+        // Promise.all 사용
+        // 여러개의 비동기 작업을 동시에 실행하여 모든 작업이 끝나면 그 결과들을 모아서 처리할 수 있게 함
+        // 비동기로 서버로부터 header.html과 aside.html을 가져옴
+        Promise.all([
+            // fetch 사용 header.html 파일과 aside.html 파일을 가져옴
+            fetch('/module/header.html').then(res => res.text()),
+            fetch('/module/aside.html').then(res => res.text())
+        ]).then(([headerData, asideData]) => {          // .then 모든 프로미스가 성공적으로 완료되었을 때의 처리
+
+            // 서버로부터 가져온 데이터를 각각의 요소에 추가
+            header.innerHTML = headerData;
+            aside.innerHTML = asideData;
+
+            // 사이드메뉴바 이벤트 처리
+            var isMovedSideMenuBar = false;
+            var sideMenuBtn = document.getElementById("side_menu_bar_btn");
+
+            sideMenuBtn.addEventListener("click", function () {
+                var sideMenuBar = document.querySelector("#side_menu_bar .side_menus");
+
+                if (isMovedSideMenuBar == false) {
+                    sideMenuBar.style.left = "0";
+                    isMovedSideMenuBar = true
+                } else {
+                    sideMenuBar.style.left = "-252px";
+                    isMovedSideMenuBar = false;
+                }
+
+                sideMenuBar.style.transition = "left 1s";
+            });
+        });
+    </script>
 </body>
 
 </html>
