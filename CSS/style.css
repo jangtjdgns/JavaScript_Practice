@@ -19,12 +19,18 @@ body {
     width: 100%;
 }
 
+main {
+    border: 2px solid;
+    margin: 10px;
+    padding: 20px;
+}
+
 /* 사이드 메뉴 바 */
-#side_menu_bar {
+aside {
     position: relative;
 }
 
-#side_menu_bar .side_menus {
+aside .side_menus {
     width: 250px;
     height: auto;
     border: 1px solid;
@@ -35,11 +41,11 @@ body {
     background-color: white;
 }
 
-#side_menu_bar .side_menus>div {
+aside .side_menus>div {
     position: relative;
 }
 
-#side_menu_bar .side_menus>div #side_menu_bar_btn {
+aside .side_menus>div #side_menu_bar_btn {
     width: 30px;
     height: 50px;
     position: absolute;
@@ -48,12 +54,12 @@ body {
     transition: width 1s;
 }
 
-#side_menu_bar .side_menus>div #side_menu_bar_btn:hover {
+aside .side_menus>div #side_menu_bar_btn:hover {
     width: 50px;
     cursor: pointer;
 }
 
-#side_menu_bar .side_menus a {
+aside .side_menus a {
     display: block;
     margin: 20px;
     padding: 10px 20px;
@@ -63,21 +69,15 @@ body {
     font-size: 24px;
 }
 
-#side_menu_bar .side_menus a:hover {
+aside .side_menus a:hover {
     background-color: #d4d4d4;
 }
 
-/* 사이드 메뉴 바 */
 
 
-.main_title_header {
+/* header */
+header {
     font-family: 'ONE-Mobile-Title';
-}
-
-article {
-    border: 2px solid;
-    margin: 10px;
-    padding: 20px;
 }
 
 /* Home. index */
@@ -128,7 +128,6 @@ article {
 /* 3. currentTime */
 .currentTime_article {
     text-align: center;
-    border: 2px solid;
 }
 
 .currentTime_article .currentTime_title {
@@ -510,7 +509,7 @@ article {
     text-align: center;
 }
 
-.percentage_article_input_wrap{
+.percentage_article_input_wrap {
     margin-bottom: 50px;
 }
 
@@ -606,4 +605,73 @@ article {
 .paint_article .refer {
     margin: 20px 0 0 0;
     font-weight: bold;
+}
+
+
+
+/* 12. addBox */
+.add_box_article {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 20px 0;
+    border-bottom: 2px solid;
+}
+
+.add_box_article>button {
+    width: 150px;
+    height: 60px;
+    margin: 0 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.add_box_article>div {
+    width: 250px;
+    margin: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.add_box_article p {
+    display: inline-block;
+}
+
+.box_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
+    position: relative;
+    font-size: 22px;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.box:hover {
+    background-color: #e2e2e2;
+    transform: scale(1.05);
+}
+
+.box>.delete_button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -9,65 +9,33 @@
 </head>
 
 <body id="index">
-    <aside></aside>
-    <header></header>
+    <aside>
+        <script async src="/javascript/aside.js"></script>
+    </aside>
+    <header>
+        <script defer src="/javascript/header.js"></script>
+    </header>
 
     <main>
         <article class="contents_article">
-            <p class="sub_title"><a href="/Contents/CRUD_prompt.html">1. CRUD_prompt</a></p>
-            <p class="sub_title"><a href="/Contents/CRUD_input.html">2. CRUD_input</a></p>
-            <p class="sub_title"><a href="/Contents/currentTime.html">3. 현재시간</a></p>
-            <p class="sub_title"><a href="/Contents/stopWatch.html">4. 스톱워치</a></p>
-            <p class="sub_title"><a href="/Contents/timer.html">5. 타이머</a></p>
-            <p class="sub_title"><a href="/Contents/toDoList.html">6. 할 일 목록</a></p>
-            <p class="sub_title"><a href="/Contents/dictation.html">7. 따라쓰기</a></p>
-            <p class="sub_title"><a href="/Contents/calculator.html">8. 계산기(미완)</a></p>
-            <p class="sub_title"><a href="/Contents/percentage.html">9. 퍼센티지</a></p>
-            <p class="sub_title"><a href="/Contents/paint.html">10. 그리기</a></p>
-            <p class="sub_title"><a href="/Contents/sideBar.html">11. 사이드 메뉴 바</a></p>
+            <p class="sub_title"><a href="/html/home/CRUD_prompt.html">1. CRUD_prompt</a></p>
+            <p class="sub_title"><a href="/html/home/CRUD_input.html">2. CRUD_input</a></p>
+            <p class="sub_title"><a href="/html/home/currentTime.html">3. 현재시간</a></p>
+            <p class="sub_title"><a href="/html/home/stopWatch.html">4. 스톱워치</a></p>
+            <p class="sub_title"><a href="/html/home/timer.html">5. 타이머</a></p>
+            <p class="sub_title"><a href="/html/home/toDoList.html">6. 할 일 목록</a></p>
+            <p class="sub_title"><a href="/html/home/dictation.html">7. 따라쓰기</a></p>
+            <p class="sub_title"><a href="/html/home/calculator.html">8. 계산기(미완)</a></p>
+            <p class="sub_title"><a href="/html/home/percentage.html">9. 퍼센티지</a></p>
+            <p class="sub_title"><a href="/html/home/paint.html">10. 그리기</a></p>
+            <p class="sub_title"><a href="/html/home/sideBar.html">11. 사이드 메뉴 바</a></p>
+            <p class="sub_title"><a href="/html/home/addBox.html">12. 박스 추가</a></p>
         </article>
     </main>
 
     <footer>
 
     </footer>
-
-    <script>
-        const aside = document.querySelector('aside');
-        const header = document.querySelector('header');
-
-        // Promise.all 사용
-        // 여러개의 비동기 작업을 동시에 실행하여 모든 작업이 끝나면 그 결과들을 모아서 처리할 수 있게 함
-        // 비동기로 서버로부터 header.html과 aside.html을 가져옴
-        Promise.all([
-            // fetch 사용 header.html 파일과 aside.html 파일을 가져옴
-            fetch('/module/header.html').then(res => res.text()),
-            fetch('/module/aside.html').then(res => res.text())
-        ]).then(([headerData, asideData]) => {          // .then 모든 프로미스가 성공적으로 완료되었을 때의 처리
-
-            // 서버로부터 가져온 데이터를 각각의 요소에 추가
-            header.innerHTML = headerData;
-            aside.innerHTML = asideData;
-
-            // 사이드메뉴바 이벤트 처리
-            var isMovedSideMenuBar = false;
-            var sideMenuBtn = document.getElementById("side_menu_bar_btn");
-
-            sideMenuBtn.addEventListener("click", function () {
-                var sideMenuBar = document.querySelector("#side_menu_bar .side_menus");
-
-                if (isMovedSideMenuBar == false) {
-                    sideMenuBar.style.left = "0";
-                    isMovedSideMenuBar = true
-                } else {
-                    sideMenuBar.style.left = "-252px";
-                    isMovedSideMenuBar = false;
-                }
-
-                sideMenuBar.style.transition = "left 1s";
-            });
-        });
-    </script>
 </body>
 
 </html>

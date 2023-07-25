@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addBox</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+
+<body>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="add_box_article">
+            <button id="add_box_btn">박스 추가</button>
+            <button id="reset_boxt_btn">박스 초기화</button>
+            <div>총 추가된 박스 개수: <p id="total_box_count">0개</p></div>
+            <div>현재 박스 개수: <p id="current_box_bount">0개</p></div>
+        </article>
+        <article>
+            <div id="container" class="box_container">
+
+            </div>
+        </article>
+    </main>
+</body>
+
+<script>
+    var totalBoxCount = 1;
+    var currentBoxCount = 1;
+    var addBoxBtn = document.getElementById("add_box_btn");
+    var boxContainer = document.getElementById("container");
+    
+    var totalBoxCountText = document.getElementById("total_box_count");
+    var currentBoxCountText = document.getElementById("current_box_bount");
+
+    addBoxBtn.addEventListener("click", function (e) {
+        var box = document.createElement("div");
+        box.className = "box";
+        box.textContent = "박스" + totalBoxCount++;
+        setColor(box);  // 랜덤 배경색
+        boxContainer.appendChild(box);
+
+        var button = document.createElement("button");
+        button.className = "delete_button";
+        button.textContent = "X";
+        boxContainer.lastChild.appendChild(button);
+
+        button.addEventListener("click", function () {
+            currentBoxCount--;
+            currentBoxCountText.innerText = `${currentBoxCount - 1}개`;
+            box.remove();
+        })
+
+        totalBoxCountText.innerText = `${totalBoxCount - 1}개`;
+        currentBoxCountText.innerText = `${currentBoxCount++}개`;
+    });
+
+
+    var resetBoxBtn = document.getElementById("reset_boxt_btn");
+    resetBoxBtn.addEventListener("click", function () {
+        boxContainer.innerHTML = "";
+        currentBoxCount = 1;
+        totalBoxCount = 1;
+        totalBoxCountText.innerText = "0개";
+        currentBoxCountText.innerText = "0개";
+    });
+
+
+    // 랜덤 배경색 지정
+    function setColor(box) {
+        var rgb = [];
+        var randNum = 0;
+
+        for (var i = 0; i < 3; i++) {
+            randNum = Math.round(Math.random() * 255);
+            rgb.push(`${checkNum(randNum)}`);
+        }
+
+        box.style.color = `#${rgb[2]}${rgb[0]}${rgb[1]}`;
+        return box.style.backgroundColor = `#${rgb[0]}${rgb[1]}${rgb[2]}`;
+    }
+
+    function checkNum(num) {
+        return num < 16 ? `0${num.toString(16)}` : num.toString(16);
+    }
+
+</script>
+
+</html>
