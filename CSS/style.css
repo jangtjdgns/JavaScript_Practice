@@ -36,8 +36,8 @@ aside .side_menus {
     border: 2px solid;
     position: absolute;
     top: 0;
-    /* border가 1px 이기때문에 -252px 줌 양쪽 1px씩*/
-    left: -252px;
+    /* border가 2px 이기때문에 -254px 줌 양쪽 2px씩*/
+    left: -254px;
     background-color: white;
 }
 
@@ -76,7 +76,7 @@ aside .title_wrap {
     max-height: 0;
     transform: scaleY(0);
     transform-origin: 0 0;
-    transition: all 0.3s;
+    transition: all 0.5s;
 }
 
 aside .side_menus a {

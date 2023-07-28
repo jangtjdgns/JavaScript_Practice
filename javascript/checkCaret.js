@@ -1,29 +1,50 @@
-var scaleY = 0;
-var height = 0;
-var rightDown = 'right';
+// right-down
+var buttonCaret = {
+    Home: 'right',
+    CodeUp: 'right',
+    Another: 'right',
+};
 
-var scaleY2 = 0;
-var height2 = 0;
+// max-height: 0 - 100 vh
+var buttonHeight = {
+    Home: 0,
+    CodeUp: 0,
+    Another: 0,
+};
 
-function titleMenu() {
-    var homeBtn = document.getElementById("menu_home_btn");
-    rightDown == 'right' ? rightDown = 'down' : rightDown = 'right';
-    homeBtn.innerHTML = `<i class="fa-regular fa-square-caret-${rightDown}"></i> Home`;
+// scale: 0 - 1
+var buttonScaleY = {
+    Home: 0,
+    CodeUp: 0,
+    Another: 0,
+};
 
-    var firstTitle = document.getElementById("home_wrap");
-    height == 0 ? height = 100 : height = 0;
-    firstTitle.style.maxHeight = height + "vh";
 
-    scaleY == 0 ? scaleY = 1 : scaleY = 0;
-    firstTitle.style.transform = "scaleY(" + scaleY + ")";
-}
+function titleMenu(btnIndex, name) {
+    var btn = document.getElementsByClassName("title_menu_btn");
+    var titleWrap = document.getElementsByClassName("title_wrap");
 
-function titleMenu2() {
+    // caret 방향
+    for (var key in buttonCaret) {
+        if (name == key) {
+            buttonCaret[key] == 'right' ? buttonCaret[key] = 'down' : buttonCaret[key] = 'right';
+            btn[btnIndex].innerHTML = `<i class="fa-regular fa-square-caret-${buttonCaret[key]}"></i> ${name}`;
+        }
+    }
 
-    var secondTitle = document.getElementById("codeup_wrap");
-    height2 == 0 ? height2 = 100 : height2 = 0;
-    secondTitle.style.maxHeight = height2 + "vh";
+    // 높이
+    for (var key in buttonHeight) {
+        if (name == key) {
+            buttonHeight[key] == 0 ? buttonHeight[key] = 100 : buttonHeight[key] = 0;
+            titleWrap[btnIndex].style.maxHeight = buttonHeight[key] + "vh";
+        }
+    }
 
-    scaleY2 == 0 ? scaleY2 = 1 : scaleY2 = 0;
-    secondTitle.style.transform = "scaleY(" + scaleY2 + ")";
+    // scaleY
+    for (var key in buttonScaleY) {
+        if (name == key) {
+            buttonScaleY[key] == 0 ? buttonScaleY[key] = 1 : buttonScaleY[key] = 0;
+            titleWrap[btnIndex].style.transform = "scaleY(" + buttonScaleY[key] + ")";
+        }
+    }
 }

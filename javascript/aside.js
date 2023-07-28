@@ -15,7 +15,7 @@ Promise.all([
             sideMenuBar.style.left = "0";
             isMovedSideMenuBar = true
         } else {
-            sideMenuBar.style.left = "-252px";
+            sideMenuBar.style.left = "-254px";
             isMovedSideMenuBar = false;
         }
 

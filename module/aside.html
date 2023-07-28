@@ -1,6 +1,8 @@
 <div class="side_menus">
     <div id="side_menu_bar_btn"><img id="side_menu_bar_btn_img" src="/img/sidebarBtn.png"></div>
-    <button id="menu_home_btn" class="title_menu_btn" onclick="titleMenu()"><i class="fa-regular fa-square-caret-right"></i> Home</button>
+
+    <!-- 1 -->
+    <button id="menu_home_btn" class="title_menu_btn" onclick="titleMenu('0', 'Home')"><i class="fa-regular fa-square-caret-right"></i> Home</button>
     <div id="home_wrap" class="title_wrap">
         <a href="/html/home/CRUD_prompt.html"><i class="fa-solid fa-caret-right"></i> CRUD_prompt</a>
         <a href="/html/home/CRUD_input.html"><i class="fa-solid fa-caret-right"></i> CRUD_input</a>
@@ -16,7 +18,9 @@
         <a href="/html/home/addBox.html"><i class="fa-solid fa-caret-right"></i> 박스 추가</a>
         <a href="/html/home/moveBox.html"><i class="fa-solid fa-caret-right"></i> 박스 옮기기</a>
     </div>
-    <button id="menu_codeUp" class="title_menu_btn" onclick="titleMenu2()"><i class="fa-regular fa-square-caret-down"></i> CodeUp</button>
+
+    <!-- 1 -->
+    <button id="menu_codeUp" class="title_menu_btn" onclick="titleMenu('1', 'CodeUp')"><i class="fa-regular fa-square-caret-right"></i> CodeUp</button>
     <div id="codeup_wrap_btn" class="title_wrap">
         <a href="#">- test1</a>
         <a href="#">- test2</a>
@@ -24,5 +28,16 @@
         <a href="#">- test4</a>
         <a href="#">- test5</a>
         <a href="#"><i class="fa-solid fa-caret-right"></i> test6</a>
+    </div>
+
+    <!-- 2 -->
+    <button id="menu_another" class="title_menu_btn" onclick="titleMenu('2', 'Another')"><i class="fa-regular fa-square-caret-right"></i> Another</button>
+    <div id="another_wrap_btn" class="title_wrap">
+        <a href="#">- test1</a>
+        <a href="#">- test2</a>
+        <a href="#">- test3</a>
+        <a href="#">- test4</a>
+        <a href="#">- test5</a>
+        <a href="#">- test6</a>
     </div>
 </div>
