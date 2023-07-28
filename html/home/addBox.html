@@ -24,8 +24,10 @@
         <article class="add_box_article">
             <button id="add_box_btn">박스 추가</button>
             <button id="reset_boxt_btn">박스 초기화</button>
-            <div>총 추가된 박스 개수: <p id="total_box_count">0개</p></div>
-            <div>현재 박스 개수: <p id="current_box_bount">0개</p></div>
+            <div>총 추가된 박스 개수: <p id="total_box_count">0개</p>
+            </div>
+            <div>현재 박스 개수: <p id="current_box_bount">0개</p>
+            </div>
         </article>
         <article>
             <div id="container" class="box_container">
@@ -38,13 +40,52 @@
 <script>
     var totalBoxCount = 1;
     var currentBoxCount = 1;
-    var addBoxBtn = document.getElementById("add_box_btn");
-    var boxContainer = document.getElementById("container");
     
+    var boxContainer = document.getElementById("container");
+
+    var addBoxBtn = document.getElementById("add_box_btn");
+    var resetBoxBtn = document.getElementById("reset_boxt_btn");
+
     var totalBoxCountText = document.getElementById("total_box_count");
     var currentBoxCountText = document.getElementById("current_box_bount");
 
-    addBoxBtn.addEventListener("click", function (e) {
+    // 박스 추가 버튼 클릭 시
+    addBoxBtn.addEventListener("click", function () {
+        addBox();
+    });
+
+    // 키보드 +: 107 클릭 시
+    document.addEventListener("keydown", function (event) {
+        if (event.keyCode == 107) {
+            return addBox();
+        }
+
+        if (event.keyCode == 109) {
+            var boxes = document.getElementsByClassName("box");
+            if(boxes.length == 0){
+                return;
+            }
+            currentBoxCount--;
+            currentBoxCountText.innerText = `${currentBoxCount - 1}개`;
+            return boxes[boxes.length - 1].remove();
+        }
+
+        if (event.keyCode == 82) {
+            return deleteAllBox();
+        }
+    });
+
+    // 박스 초기화 버튼 클릭 시
+    resetBoxBtn.addEventListener("click", function () {
+        deleteAllBox();
+    });
+
+
+    // 박스 추가 함수
+    function addBox() {
+        if (currentBoxCount > 100) {
+            return alert("더이상 생성 불가합니다.");
+        }
         var box = document.createElement("div");
         box.className = "box";
         box.textContent = "박스" + totalBoxCount++;
@@ -60,21 +101,20 @@
             currentBoxCount--;
             currentBoxCountText.innerText = `${currentBoxCount - 1}개`;
             box.remove();
-        })
+        });
 
         totalBoxCountText.innerText = `${totalBoxCount - 1}개`;
         currentBoxCountText.innerText = `${currentBoxCount++}개`;
-    });
+    }
 
-
-    var resetBoxBtn = document.getElementById("reset_boxt_btn");
-    resetBoxBtn.addEventListener("click", function () {
+    // 전체 박스 초기화 함수
+    function deleteAllBox(){
         boxContainer.innerHTML = "";
         currentBoxCount = 1;
         totalBoxCount = 1;
         totalBoxCountText.innerText = "0개";
         currentBoxCountText.innerText = "0개";
-    });
+    }
 
 
     // 랜덤 배경색 지정

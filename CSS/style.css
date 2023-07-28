@@ -33,7 +33,7 @@ aside {
 aside .side_menus {
     width: 250px;
     height: auto;
-    border: 1px solid;
+    border: 2px solid;
     position: absolute;
     top: 0;
     /* border가 1px 이기때문에 -252px 줌 양쪽 1px씩*/
@@ -41,11 +41,11 @@ aside .side_menus {
     background-color: white;
 }
 
-aside .side_menus>div {
+aside .side_menus>#side_menu_bar_btn {
     position: relative;
 }
 
-aside .side_menus>div #side_menu_bar_btn {
+aside .side_menus>div #side_menu_bar_btn_img {
     width: 30px;
     height: 50px;
     position: absolute;
@@ -54,19 +54,39 @@ aside .side_menus>div #side_menu_bar_btn {
     transition: width 1s;
 }
 
-aside .side_menus>div #side_menu_bar_btn:hover {
+aside .title_menu_btn {
+    margin: 5px 0;
+    padding: 5px;
+    border: 0px;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+aside .title_menu_btn:hover {
+    cursor: pointer;
+}
+
+aside .side_menus>div #side_menu_bar_btn_img:hover {
     width: 50px;
     cursor: pointer;
 }
 
+aside .title_wrap {
+    max-height: 0;
+    transform: scaleY(0);
+    transform-origin: 0 0;
+    transition: all 0.3s;
+}
+
 aside .side_menus a {
     display: block;
-    margin: 20px;
-    padding: 10px 20px;
+    margin: 0 20px 5px 20px;
+    padding: 0 5px;
     text-align: left;
-    border: 2px solid;
-    border-radius: 5px;
-    font-size: 24px;
+    /* border: 2px solid; */
+    /* border-radius: 5px; */
+    font-size: 18px;
 }
 
 aside .side_menus a:hover {
@@ -93,7 +113,7 @@ header {
 .main_nav {
     margin: 10px;
     padding: 10px 0;
-    background-color: rgb(29, 29, 29);
+    background-color: #614498;
 }
 
 .main_nav>ul>li {
@@ -103,7 +123,7 @@ header {
 }
 
 .main_nav>ul>li:hover {
-    background-color: rgb(117, 99, 99);
+    background-color: #3D2C60;
 }
 
 .main_nav>ul>li>a {
