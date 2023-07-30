@@ -666,7 +666,7 @@ header {
     margin-bottom: 20px;
 }
 
-.box {
+.add_box {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -679,12 +679,12 @@ header {
     transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-.box:hover {
+.add_box:hover {
     background-color: #e2e2e2;
     transform: scale(1.05);
 }
 
-.box>.delete_button {
+.add_box>.delete_button {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -694,4 +694,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+
+/* 13. moveBox */
+.move_box_article{
+    position: relative;
+    width: 100%;
+    height: 50vh;
 }

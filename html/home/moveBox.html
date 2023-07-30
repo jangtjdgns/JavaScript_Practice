@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>moveBox</title>
+    <link rel="stylesheet" href="/CSS/style.css">
 </head>
+
 <body>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>addBox</title>
-        <link rel="stylesheet" href="/CSS/style.css">
-    </head>
-    
-    <body>
-        <header class="main_title_header">
-            <h1 class="main_title">JavaScript 이것저것</h1>
-            <nav class="main_nav">
-                <ul>
-                    <li><a href="/index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Another</a></li>
-                </ul>
-            </nav>
-        </header>
-    
-        <main>
-            
-        </main>
-    </body>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article class="move_box_article">
+            <div id="move_box" style="
+                position: absolute;
+                top: 0px; left: 0px;
+                width: 50px;
+                height: 50px;
+                background-color: #614498;">
+            </div>
+        </article>
+    </main>
+
+    <script>
+        document.addEventListener("keydown", function (event) {
+            var moveBox = document.getElementById("move_box");
+            var upDown = Number(moveBox.style.top.slice(0, -2));
+            var leftRight = Number(moveBox.style.left.slice(0, -2));
+
+            switch (event.key) {
+                case 'ArrowUp':
+                    moveBox.style.top = (upDown - 5) + "px";
+                    break;
+                case 'ArrowDown':
+                    moveBox.style.top = (upDown + 5) + "px";
+                    break;
+                case 'ArrowLeft':
+                    moveBox.style.left = (leftRight - 5) + "px";
+                    break;
+                case 'ArrowRight':
+                    moveBox.style.left = (leftRight + 5) + "px";
+                    break;
+            }
+        });
+    </script>
 </body>
+
 </html>
