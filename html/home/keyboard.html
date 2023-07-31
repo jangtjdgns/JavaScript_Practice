@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+
+<body>
+    <header class="main_title_header">
+        <h1 class="main_title">JavaScript 이것저것</h1>
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Another</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <table id="keyboard_table" border="1" style="width: 100%; text-align: center;">
+                <tbody>
+                    <tr>
+                        <td class="keyboard_number">1</td>
+                        <td class="keyboard_number">2</td>
+                        <td class="keyboard_number">3</td>
+                        <td class="keyboard_number">4</td>
+                        <td class="keyboard_number">5</td>
+                        <td class="keyboard_number">6</td>
+                        <td class="keyboard_number">7</td>
+                        <td class="keyboard_number">8</td>
+                        <td class="keyboard_number">9</td>
+                        <td class="keyboard_number">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </main>
+
+    <script>
+        var td = document.getElementsByClassName("keyboard_number");
+
+        var tdArr = Array.from(td);
+
+        var idx = 0;
+
+        for (var i = 0; i < tdArr.length; i++) {
+            tdArr[i] = tdArr[i].textContent;
+        }
+
+        document.addEventListener("keydown", function (e) {
+            idx = tdArr.indexOf(e.key);
+
+            if (tdArr.indexOf(e.key) != -1); {
+                td[idx].style.backgroundColor = "black";
+                td[idx].style.color = "white";
+            }
+        })
+
+        document.addEventListener("keyup", function (e) {
+            idx = tdArr.indexOf(e.key);
+
+            if (tdArr.indexOf(e.key) != -1); {
+                td[idx].style.backgroundColor = "white";
+                td[idx].style.color = "black";
+            }
+        })
+
+    </script>
+</body>
+
+</html>
