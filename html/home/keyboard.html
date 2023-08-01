@@ -21,19 +21,68 @@
     </header>
     <main>
         <article>
-            <table id="keyboard_table" border="1" style="width: 100%; text-align: center;">
+            <table id="keyboard_table" border="1">
                 <tbody>
                     <tr>
-                        <td class="keyboard_number">1</td>
-                        <td class="keyboard_number">2</td>
-                        <td class="keyboard_number">3</td>
-                        <td class="keyboard_number">4</td>
-                        <td class="keyboard_number">5</td>
-                        <td class="keyboard_number">6</td>
-                        <td class="keyboard_number">7</td>
-                        <td class="keyboard_number">8</td>
-                        <td class="keyboard_number">9</td>
-                        <td class="keyboard_number">0</td>
+                        <td class="keyboard">`</td>
+                        <td class="keyboard">1</td>
+                        <td class="keyboard">2</td>
+                        <td class="keyboard">3</td>
+                        <td class="keyboard">4</td>
+                        <td class="keyboard">5</td>
+                        <td class="keyboard">6</td>
+                        <td class="keyboard">7</td>
+                        <td class="keyboard">8</td>
+                        <td class="keyboard">9</td>
+                        <td class="keyboard">0</td>
+                        <td class="keyboard">-</td>
+                        <td class="keyboard">=</td>
+                        <td class="keyboard" colspan="2">Backspace</td>
+                    </tr>
+                    <tr>
+                        <td class="keyboard">Tab</td>
+                        <td class="keyboard">q</td>
+                        <td class="keyboard">w</td>
+                        <td class="keyboard">e</td>
+                        <td class="keyboard">r</td>
+                        <td class="keyboard">t</td>
+                        <td class="keyboard">y</td>
+                        <td class="keyboard">u</td>
+                        <td class="keyboard">i</td>
+                        <td class="keyboard">o</td>
+                        <td class="keyboard">p</td>
+                        <td class="keyboard">[</td>
+                        <td class="keyboard">]</td>
+                        <td class="keyboard">\</td>
+                    </tr>
+                    <tr>
+                        <td class="keyboard">CapsLock</td>
+                        <td class="keyboard">a</td>
+                        <td class="keyboard">s</td>
+                        <td class="keyboard">d</td>
+                        <td class="keyboard">f</td>
+                        <td class="keyboard">g</td>
+                        <td class="keyboard">h</td>
+                        <td class="keyboard">j</td>
+                        <td class="keyboard">k</td>
+                        <td class="keyboard">l</td>
+                        <td class="keyboard">;</td>
+                        <td class="keyboard">'</td>
+                        <td class="keyboard" colspan="2">Enter</td>
+                    </tr>
+                    <tr>
+                        <td class="keyboard" colspan="2">Shift</td>
+                        <td class="keyboard">z</td>
+                        <td class="keyboard">x</td>
+                        <td class="keyboard">c</td>
+                        <td class="keyboard">v</td>
+                        <td class="keyboard">b</td>
+                        <td class="keyboard">n</td>
+                        <td class="keyboard">m</td>
+                        <td class="keyboard">,</td>
+                        <td class="keyboard">.</td>
+                        <td class="keyboard">/</td>
+                        <td class="keyboard" colspan="2">Shift</td>
                     </tr>
                 </tbody>
             </table>
@@ -41,7 +90,7 @@
     </main>
 
     <script>
-        var td = document.getElementsByClassName("keyboard_number");
+        var td = document.getElementsByClassName("keyboard");
 
         var tdArr = Array.from(td);
 
@@ -51,13 +100,24 @@
             tdArr[i] = tdArr[i].textContent;
         }
 
+        console.log(tdArr[tdArr.length - 1]);
+
         document.addEventListener("keydown", function (e) {
             idx = tdArr.indexOf(e.key);
+
+            console.log(e.key);
+            console.log(e.keyCode);
+            console.log(e.code);
 
             if (tdArr.indexOf(e.key) != -1); {
                 td[idx].style.backgroundColor = "black";
                 td[idx].style.color = "white";
+                if (e.key == 'Shift') {
+                    td[idx + 11].style.backgroundColor = "black";
+                    td[idx + 11].style.color = "white";
+                }
             }
+
         })
 
         document.addEventListener("keyup", function (e) {
@@ -66,6 +126,10 @@
             if (tdArr.indexOf(e.key) != -1); {
                 td[idx].style.backgroundColor = "white";
                 td[idx].style.color = "black";
+                if (e.key == 'Shift') {
+                    td[idx + 11].style.backgroundColor = "white";
+                    td[idx + 11].style.color = "black";
+                }
             }
         })
 
