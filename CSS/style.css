@@ -28,6 +28,7 @@ main {
 /* 사이드 메뉴 바 */
 aside {
     position: relative;
+    z-index: 99;
 }
 
 aside .side_menus {
