@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이것저것</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <script src="https://kit.fontawesome.com/7a79c7be2a.js" crossorigin="anonymous"></script>
+    <style>
+        .test_wrap i {
+            font-size: 30px;
+        }
+
+        .test_wrap i:hover {
+            cursor: pointer;
+        }
+
+        .test_wrap .text_wrap {
+            overflow: hidden;
+            height: 22px;
+            border: 2px solid;
+        }
+
+        .test_wrap .text_wrap .text {
+            transform: translateY(0%);
+            transition: transform 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <script async src="/javascript/aside.js"></script>
+    </aside>
+    <header>
+        <script defer src="/javascript/header.js"></script>
+    </header>
+
+    <main>
+        <article class="test_wrap">
+            <div class="text_wrap">
+                <p class="text">안녕하세요. 1</p>
+                <p class="text">안녕하세요. 2</p>
+                <p class="text">안녕하세요. 3</p>
+                <p class="text">안녕하세요. 4</p>
+                <p class="text">안녕하세요. 5</p>
+                <p class="text">안녕하세요. 6</p>
+            </div>
+            <i id="up" class="fa-solid fa-square-caret-up"></i>
+            <i id="down" class="fa-solid fa-square-caret-down"></i>
+        </article>
+    </main>
+
+    <script defer src="/javascript/checkCaret.js"></script>
+    <script>
+        var upBtn = document.getElementById("up");
+        var downBtn = document.getElementById("down");
+        var text = document.getElementsByClassName("text");
+
+        var textY = 0;
+        var textMax = (text.length * 100) - 100;
+
+        console.log(textMax);
+        upBtn.addEventListener("click", function () {
+            if (textY < 0) {
+                textY += 100;
+            } else {
+                textY = -500;
+            }
+            upDown(textY);
+        })
+
+        downBtn.addEventListener("click", function () {
+            if (textY > -textMax) {
+                textY -= 100;
+            } else {
+                textY = 0;
+            }
+            upDown(textY);
+        })
+
+        function upDown(tY) {
+            for (var y of text) {
+                y.style.transform = "translateY(" + tY + "%)";
+            }
+        }
+
+        var second = 0;
+
+        setInterval(function () {
+            if (textY > -textMax) {
+                textY -= 100;
+            } else {
+                textY = 0;
+            }
+            upDown(textY);
+        }, 5000);
+    </script>
+</body>
+
+</html>
