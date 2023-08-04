@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+
+<body>
+    <article>
+        <div class="change_box_order">
+            <button class="change_box_order_btn" id="change_box_order_prevBtn">prev</button>
+            <button class="change_box_order_btn" id="change_box_order_nextBtn">next</button>
+            <ul class="change_box_order_ul">
+                <li>
+                    <p class="change_box_order_box" style="background-color: red;">1</p>
+                </li>
+                <li>
+                    <p class="change_box_order_box" style="background-color: blue;">2</p>
+                </li>
+                <li>
+                    <p class="change_box_order_box" style="background-color: green;">3</p>
+                </li>
+                <li>
+                    <p class="change_box_order_box" style="background-color: yellow;">4</p>
+                </li>
+                <li>
+                    <p class="change_box_order_box" style="background-color:pink;">5</p>
+                </li>
+                <li>
+                    <p class="change_box_order_box" style="background-color:orange;">6</p>
+                </li>
+                <li>
+                    <p class="change_box_order_box" style="background-color:purple;">7</p>
+                </li>
+            </ul>
+        </div>
+    </article>
+
+
+    <script>
+        var prevBtn = document.getElementById("change_box_order_prevBtn");
+        var nextBtn = document.getElementById("change_box_order_nextBtn");
+
+        var ul = document.getElementsByClassName("change_box_order_ul")[0];
+
+        var liArr = Array.from(ul.children);
+
+        var temp;
+
+        console.log(liArr[0]);
+
+        prevBtn.addEventListener("click", function () {
+            temp = liArr[liArr.length - 1];
+            liArr.pop();
+            liArr.unshift(temp);
+            setLi();
+        })
+
+        nextBtn.addEventListener("click", function () {
+            temp = liArr[0];
+            liArr.shift();
+            liArr.push(temp);
+            setLi();
+        })
+
+        function setLi() {
+            ul.innerHTML = "";
+            liArr.forEach(function (li) {
+                ul.appendChild(li);
+            })
+        }
+    </script>
+</body>
+
+</html>
