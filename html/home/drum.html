@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drum</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <style>
+        #drum-title{
+            text-align: center;
+            margin: 10px 0;
+        }
+        .drum-article {
+            text-align: center;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/7a79c7be2a.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            const keyColor = { 'color': 'red' };
+
+            $(window).keydown((e) => {
+                console.log(e.key);
+                if (e.key == 'f') {
+                    $('#hihat-close').css(keyColor);
+                    var hiHatCymbalClose = new Audio('/sound/닫힌 하이햇(치).mp3');
+                    hiHatCymbalClose.play()
+                } else if (e.key == 'd') {
+                    $('#hihat-open').css(keyColor);
+                    var hiHatCymbalOpen = new Audio('/sound/열린 하이햇(치).mp3');
+                    hiHatCymbalOpen.play();
+                } else if (e.key == 'r') {
+                    $('#carsh-cymbal').css(keyColor);
+                    var carshCymbal = new Audio('/sound/크래쉬 심벌.mp3');
+                    carshCymbal.play();
+                } else if (e.key == 'j') {
+                    $('#snare').css(keyColor);
+                    var snare = new Audio('/sound/스네어 1(타).mp3');
+                    snare.play();
+                } else if (e.key == 'k') {
+                    $('#snare-drum-rim').css(keyColor);
+                    var snaerDrumRim = new Audio('/sound/스네어 테두리.mp3');
+                    snaerDrumRim.play();
+                } else if (e.key == 'g') {
+                    $('#small-tom').css(keyColor);
+                    var smallTom = new Audio('/sound/스몰톰.mp3');
+                    smallTom.play();
+                } else if (e.key == 'h') {
+                    $('#medium-tom').css(keyColor);
+                    var mediumTom = new Audio('/sound/미디움톰.mp3');
+                    mediumTom.play();
+                } else if (e.key == 'n') {
+                    $('#floor-tom').css(keyColor);
+                    var floorTom = new Audio('/sound/플로어톰.mp3');
+                    floorTom.play();
+                }
+                else if (e.key == ' ') {
+                    $('#kick-drum').css(keyColor);
+                    var kickDrum = new Audio('/sound/킥드럼(쿵).mp3');
+                    kickDrum.play();
+                }
+            });
+
+            $(window).keyup((e) => {
+                $('p').css('color', 'black');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <aside>
+        <script async src="/javascript/aside.js"></script>
+    </aside>
+    <header>
+        <script defer src="/javascript/header.js"></script>
+    </header>
+
+    <main>
+        <h1 id="drum-title">드럼</h1>
+        <article class="drum-article">
+            <p id="hihat-close">f: HIHAT CYMBAL (CLOSES)</p>
+            <p id="hihat-open">d: HIHAT CYMBAL (OPEN)</p>
+            <p id="carsh-cymbal">r: CRASH CYMBAL (OPEN)</p>
+
+            <p id="snare">j: SNARE</p>
+            <p id="snare-drum-rim">k: SNARE DRUM RIM</p>
+
+            <p id="small-tom">g: SMALL TOM</p>
+            <p id="medium-tom">h: MEDIUM TOM</p>
+            <p id="floor-tom">n: FLOOR TOM</p>
+
+            <p id="kick-drum">spacebar: KICK DRUM</p>
+        </article>
+    </main>
+
+    <script defer src="/javascript/checkCaret.js"></script>
+</body>
+
+</html>
