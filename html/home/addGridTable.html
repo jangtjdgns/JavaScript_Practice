@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addGridTable</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <style>
+        /* input type number의 화살표 제거 */
+        input[type='number']::-webkit-outer-spin-button,
+        input[type='number']::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input-container {
+            margin: 0 auto;
+            width: 90%;
+            height: 100px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .input-container p {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .input-container input {
+            width: 20%;
+            height: 20px;
+            font-size: 20px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+
+        .input-container button {
+            width: 10%;
+            height: 45px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #fff;
+            color: #6b6b6b;
+        }
+
+        .input-container button:hover {
+            background-color: #6b6b6b;
+            color: white;
+        }
+
+
+
+        .modifty-container {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: right;
+        }
+
+        .modifty-container button {
+            margin: 0 10px;
+            padding: 10px 14px;
+        }
+
+
+
+        .table-container {
+            width: 90%;
+            margin: 10px auto;
+        }
+
+        .table-container .tables {
+            display: grid;
+            grid-template-columns: .8fr .3fr .8fr .8fr;
+            grid-gap: 0;
+            grid-auto-rows: minmax(60px, auto);
+            border-top: 2px solid;
+            border-left: 2px solid;
+        }
+
+        .table-container>.tables p,
+        .table-container>.tables>h1,
+        .table-container>.tables>h2 {
+            border-right: 2px solid;
+            border-bottom: 2px solid;
+            padding: 1rem;
+            display: grid;
+            grid-auto-rows: minmax(35px, auto);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #tableTitle>h1:last-child {
+            grid-column: 3/5;
+        }
+
+        .person>.person-name,
+        .person>.person-input {
+            text-align: center;
+            font-size: 20px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .person>.person-input {
+            display: none;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/7a79c7be2a.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var addArea = 0;        // 추가할 지역 수
+            var addNum = 0;         // 각 지역 내 번호 수
+            var areaCount = 1;      // 생성된 지역 수
+            var numCount = 1;       // 생성된 번호 수
+
+            $('#inputArea').on('input', function () {
+                return checkOnlyNumber($(this));
+            });
+            $('#inputNum').on('input', function () {
+                return checkOnlyNumber($(this));
+            });
+
+            $('#addBtn').click(function () {
+                addArea = $('#inputArea').val();
+                addNum = $('#inputNum').val();
+                for (var i = 0; i < addArea; i++) {
+                    $('.table-container').append($('<div>').addClass('tables'));
+                    $('.tables').last().append($('<h2>').addClass('title-area').html('제' + areaCount++ + '지역'));
+                    $('.tables').last().append($('<div>').addClass('area-wrap'));
+                    $('.tables').last().append($('<div>').addClass('first-person'));
+                    $('.tables').last().append($('<div>').addClass('second-person'));
+
+                    for (var j = 0; j < addNum; j++) {
+                        $('.tables:last-child .area-wrap').append($('<p>').addClass('area-num').html(numCount++));
+                        $('.tables:last-child .first-person').append($('<p>').addClass('person').html('<span class="person-name">X</span><input class="person-input"></input>'));
+                        $('.tables:last-child .second-person').append($('<p>').addClass('person').html('<span class="person-name">X</span><input class="person-input"></input>'));
+                    }
+                }
+            });
+
+            $('#deleteBtn').click(function () {
+                addArea = 0;
+                addNum = 0;
+                areaCount = 1;
+                numCount = 1;
+                $('.table-container .tables').not('#tableTitle').remove('.tables');
+                $('#inputArea').val('');
+                $('#inputNum').val('');
+            });
+
+            function checkOnlyNumber(th) {
+                if (!parseInt(th.val())) {
+                    return th.val('');
+                }
+            }
+
+
+            // 수정 버튼 클릭 시 input 태그 생성
+            $('#modify').click(function () {
+                $('.person-name').filter(function () {
+                    return $(this).next().val($(this).text());
+                });
+
+                $('.person-name').css('display', 'none');
+                $('.person-input').css('display', 'block');
+            });
+
+            // 확인 버튼 클릭 시 일력된 값을 텍스트로 저장
+            $('#completion').click(function () {
+                $('.person-input').filter(function () {
+                    return $(this).prev().text($(this).val());
+                });
+
+                $('.person-input').css('display', 'none');
+                $('.person-name').css('display', 'block');
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <aside>
+        <script async src="/javascript/aside.js"></script>
+    </aside>
+    <header>
+        <script defer src="/javascript/header.js"></script>
+    </header>
+    <main>
+        <article class="input-container">
+            <p>지역:</p><input id="inputArea" type="number" placeholder="숫자 입력" />
+            <p>번호:</p><input id="inputNum" type="number" placeholder="숫자 입력" />
+            <button id="addBtn">추가</button>
+            <button id="deleteBtn">초기화</button>
+        </article>
+        <article class="modifty-container">
+            <button id="modify">수정</button>
+            <button id="completion">확인</button>
+        </article>
+        <article class="table-container">
+            <div class="tables" id="tableTitle">
+                <h1>지역</h1>
+                <h1>번호</h1>
+                <h1>속회일원</h1>
+            </div>
+        </article>
+    </main>
+</body>
+
+</html>
